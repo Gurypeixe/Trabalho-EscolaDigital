@@ -1,0 +1,11 @@
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\bin\Debug\ProjetoFinal.exe.config
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\bin\Debug\ProjetoFinal.exe
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\bin\Debug\ProjetoFinal.pdb
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\bin\Debug\Guna.UI2.dll
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.csproj.AssemblyReference.cache
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.Properties.Resources.resources
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.csproj.GenerateResource.cache
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.csproj.CoreCompileInputs.cache
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoF.55FE4514.Up2Date
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.exe
+C:\Users\2224098\OneDrive - Escola Digital\Ambiente de Trabalho\GITHUB\Trabalho-EscolaDigital\ProjetoFinal\obj\Debug\ProjetoFinal.pdb
