@@ -1,4 +1,4 @@
-# Guryflix — Plataforma de Streaming de Filmes (Netflix Clone)
+# Guryflix — Plataforma de Streaming de Filmes
 
 Este é o projeto **Guryflix**, uma plataforma desktop de catálogo e reprodução de trailers de filmes desenvolvida em C# Windows Forms com base de dados SQL Server.
 
