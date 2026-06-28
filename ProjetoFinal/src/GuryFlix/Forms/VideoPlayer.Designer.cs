@@ -2,15 +2,15 @@ namespace Guryflix.Forms
 {
     partial class VideoPlayer
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        
+        
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        
+        
+        
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -28,10 +28,10 @@ namespace Guryflix.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        
+        
+        
+        
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -67,7 +67,7 @@ namespace Guryflix.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Panel();
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.panel4 = new System.Windows.Forms.Panel();
             this.Close = new System.Windows.Forms.PictureBox();
@@ -97,9 +97,9 @@ namespace Guryflix.Forms
             ((System.ComponentModel.ISupportInitialize)(this.Maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Minimize)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
+            
+            
+            
             this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
@@ -114,9 +114,9 @@ namespace Guryflix.Forms
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
             this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
-            // 
-            // panel1
-            // 
+            
+            
+            
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.totalDuration);
             this.panel1.Controls.Add(this.currentDuration);
@@ -133,9 +133,9 @@ namespace Guryflix.Forms
             this.panel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.panel1.Size = new System.Drawing.Size(680, 74);
             this.panel1.TabIndex = 2;
-            // 
-            // totalDuration
-            // 
+            
+            
+            
             this.totalDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.totalDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
             this.totalDuration.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -146,9 +146,9 @@ namespace Guryflix.Forms
             this.totalDuration.Size = new System.Drawing.Size(14, 16);
             this.totalDuration.TabIndex = 11;
             this.totalDuration.Text = "0";
-            // 
-            // currentDuration
-            // 
+            
+            
+            
             this.currentDuration.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
             this.currentDuration.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.currentDuration.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -158,9 +158,9 @@ namespace Guryflix.Forms
             this.currentDuration.Size = new System.Drawing.Size(45, 15);
             this.currentDuration.TabIndex = 25;
             this.currentDuration.Text = "00:00:00";
-            // 
-            // volumeControl
-            // 
+            
+            
+            
             this.volumeControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.volumeControl.AutoSize = false;
             this.volumeControl.Location = new System.Drawing.Point(550, 19);
@@ -170,9 +170,9 @@ namespace Guryflix.Forms
             this.volumeControl.TabIndex = 24;
             this.volumeControl.TickStyle = System.Windows.Forms.TickStyle.None;
             this.volumeControl.Scroll += new System.EventHandler(this.volume_Scroll);
-            // 
-            // likeBtn
-            // 
+            
+            
+            
             this.likeBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.likeBtn.Location = new System.Drawing.Point(57, 8);
             this.likeBtn.Name = "likeBtn";
@@ -180,18 +180,18 @@ namespace Guryflix.Forms
             this.likeBtn.TabIndex = 10;
             this.likeBtn.TabStop = false;
             this.likeBtn.Click += new System.EventHandler(this.likeBtn_Click);
-            // 
-            // panel2
-            // 
+            
+            
+            
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.volumePercentage);
             this.panel2.Location = new System.Drawing.Point(570, 47);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(94, 13);
             this.panel2.TabIndex = 9;
-            // 
-            // volumePercentage
-            // 
+            
+            
+            
             this.volumePercentage.AutoSize = true;
             this.volumePercentage.Font = new System.Drawing.Font("CarnacW03-ExtraBold", 9.749999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.volumePercentage.ForeColor = System.Drawing.Color.White;
@@ -200,9 +200,9 @@ namespace Guryflix.Forms
             this.volumePercentage.Size = new System.Drawing.Size(43, 17);
             this.volumePercentage.TabIndex = 3;
             this.volumePercentage.Text = "100%";
-            // 
-            // nextBtn
-            // 
+            
+            
+            
             this.nextBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.nextBtn.Location = new System.Drawing.Point(457, 8);
             this.nextBtn.Name = "nextBtn";
@@ -210,9 +210,9 @@ namespace Guryflix.Forms
             this.nextBtn.TabIndex = 7;
             this.nextBtn.TabStop = false;
             this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
-            // 
-            // previousBtn
-            // 
+            
+            
+            
             this.previousBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.previousBtn.Location = new System.Drawing.Point(137, 8);
             this.previousBtn.Name = "previousBtn";
@@ -220,9 +220,9 @@ namespace Guryflix.Forms
             this.previousBtn.TabIndex = 6;
             this.previousBtn.TabStop = false;
             this.previousBtn.Click += new System.EventHandler(this.previousBtn_Click);
-            // 
-            // reverseBtn
-            // 
+            
+            
+            
             this.reverseBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.reverseBtn.Location = new System.Drawing.Point(217, 8);
             this.reverseBtn.Name = "reverseBtn";
@@ -230,9 +230,9 @@ namespace Guryflix.Forms
             this.reverseBtn.TabIndex = 5;
             this.reverseBtn.TabStop = false;
             this.reverseBtn.Click += new System.EventHandler(this.reverseBtn_Click);
-            // 
-            // fastForwardBtn
-            // 
+            
+            
+            
             this.fastForwardBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.fastForwardBtn.Location = new System.Drawing.Point(377, 8);
             this.fastForwardBtn.Name = "fastForwardBtn";
@@ -240,9 +240,9 @@ namespace Guryflix.Forms
             this.fastForwardBtn.TabIndex = 4;
             this.fastForwardBtn.TabStop = false;
             this.fastForwardBtn.Click += new System.EventHandler(this.fastForwardBtn_Click);
-            // 
-            // playPauseBtn
-            // 
+            
+            
+            
             this.playPauseBtn.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.playPauseBtn.Location = new System.Drawing.Point(297, 8);
             this.playPauseBtn.Name = "playPauseBtn";
@@ -250,9 +250,9 @@ namespace Guryflix.Forms
             this.playPauseBtn.TabIndex = 3;
             this.playPauseBtn.TabStop = false;
             this.playPauseBtn.Click += new System.EventHandler(this.playPauseBtn_Click);
-            // 
-            // fullScreenBtn
-            // 
+            
+            
+            
             this.fullScreenBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fullScreenBtn.BackColor = System.Drawing.Color.Transparent;
             this.fullScreenBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -262,9 +262,9 @@ namespace Guryflix.Forms
             this.fullScreenBtn.TabIndex = 3;
             this.fullScreenBtn.TabStop = false;
             this.fullScreenBtn.Click += new System.EventHandler(this.fullScreenBtn_Click);
-            // 
-            // titleLabel
-            // 
+            
+            
+            
             this.titleLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("XXII DONT-MESS-WITH-VIKINGS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -274,9 +274,9 @@ namespace Guryflix.Forms
             this.titleLabel.Size = new System.Drawing.Size(135, 33);
             this.titleLabel.TabIndex = 4;
             this.titleLabel.Text = "Movie Title";
-            // 
-            // label1
-            // 
+            
+            
+            
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -284,9 +284,9 @@ namespace Guryflix.Forms
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(200, 3);
             this.label1.TabIndex = 18;
-            // 
-            // panel3
-            // 
+            
+            
+            
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.Color.Transparent;
@@ -301,9 +301,9 @@ namespace Guryflix.Forms
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(114, 617);
             this.panel3.TabIndex = 19;
-            // 
-            // likedVideosBtn
-            // 
+            
+            
+            
             this.likedVideosBtn.Image = ((System.Drawing.Image)(resources.GetObject("likedVideosBtn.Image")));
             this.likedVideosBtn.Location = new System.Drawing.Point(48, 369);
             this.likedVideosBtn.Name = "likedVideosBtn";
@@ -314,9 +314,9 @@ namespace Guryflix.Forms
             this.likedVideosBtn.Click += new System.EventHandler(this.likedVideosBtn_Click);
             this.likedVideosBtn.MouseLeave += new System.EventHandler(this.likedVideosBtn_MouseLeave);
             this.likedVideosBtn.MouseHover += new System.EventHandler(this.likedVideosBtn_MouseHover);
-            // 
-            // menuItem1
-            // 
+            
+            
+            
             this.menuItem1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.menuItem1.FlatAppearance.BorderSize = 0;
             this.menuItem1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -328,9 +328,9 @@ namespace Guryflix.Forms
             this.menuItem1.TabIndex = 7;
             this.menuItem1.UseVisualStyleBackColor = false;
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
-            // 
-            // settingsBtn
-            // 
+            
+            
+            
             this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
             this.settingsBtn.Location = new System.Drawing.Point(32, 567);
             this.settingsBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -343,9 +343,9 @@ namespace Guryflix.Forms
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             this.settingsBtn.MouseLeave += new System.EventHandler(this.settingsBtn_MouseLeave);
             this.settingsBtn.MouseHover += new System.EventHandler(this.settingsBtn_MouseHover);
-            // 
-            // profileBtn
-            // 
+            
+            
+            
             this.profileBtn.Image = ((System.Drawing.Image)(resources.GetObject("profileBtn.Image")));
             this.profileBtn.Location = new System.Drawing.Point(48, 424);
             this.profileBtn.Name = "profileBtn";
@@ -356,9 +356,9 @@ namespace Guryflix.Forms
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             this.profileBtn.MouseLeave += new System.EventHandler(this.profileBtn_MouseLeave);
             this.profileBtn.MouseHover += new System.EventHandler(this.profileBtn_MouseHover);
-            // 
-            // historyBtn
-            // 
+            
+            
+            
             this.historyBtn.Image = ((System.Drawing.Image)(resources.GetObject("historyBtn.Image")));
             this.historyBtn.Location = new System.Drawing.Point(48, 314);
             this.historyBtn.Name = "historyBtn";
@@ -369,9 +369,9 @@ namespace Guryflix.Forms
             this.historyBtn.Click += new System.EventHandler(this.historyBtn_Click);
             this.historyBtn.MouseLeave += new System.EventHandler(this.historyBtn_MouseLeave);
             this.historyBtn.MouseHover += new System.EventHandler(this.historyBtn_MouseHover);
-            // 
-            // searchBtn
-            // 
+            
+            
+            
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
             this.searchBtn.Location = new System.Drawing.Point(48, 262);
             this.searchBtn.Name = "searchBtn";
@@ -382,9 +382,9 @@ namespace Guryflix.Forms
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             this.searchBtn.MouseLeave += new System.EventHandler(this.searchBtn_MouseLeave);
             this.searchBtn.MouseHover += new System.EventHandler(this.searchBtn_MouseHover);
-            // 
-            // homeBtn
-            // 
+            
+            
+            
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
             this.homeBtn.Location = new System.Drawing.Point(48, 204);
             this.homeBtn.Name = "homeBtn";
@@ -395,9 +395,9 @@ namespace Guryflix.Forms
             this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
             this.homeBtn.MouseLeave += new System.EventHandler(this.homeBtn_MouseLeave);
             this.homeBtn.MouseHover += new System.EventHandler(this.homeBtn_MouseHover);
-            // 
-            // pictureBox2
-            // 
+            
+            
+            
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(7, 18);
             this.pictureBox2.Name = "pictureBox2";
@@ -406,59 +406,59 @@ namespace Guryflix.Forms
             this.pictureBox2.TabIndex = 21;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // progressBar1
-            // 
+            
+            
+            
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(120, 387);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(668, 21);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 23;
-            // 
-            // timer1
-            // 
+            
+            
+            
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label2
-            // 
+            
+            
+            
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label2.Location = new System.Drawing.Point(48, 234);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(0, 5);
             this.label2.TabIndex = 18;
-            // 
-            // label3
-            // 
+            
+            
+            
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label3.Location = new System.Drawing.Point(48, 290);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 5);
             this.label3.TabIndex = 18;
-            // 
-            // label4
-            // 
+            
+            
+            
             this.label4.BackColor = System.Drawing.Color.White;
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label4.Location = new System.Drawing.Point(48, 342);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 5);
             this.label4.TabIndex = 18;
-            // 
-            // label5
-            // 
+            
+            
+            
             this.label5.BackColor = System.Drawing.Color.White;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Location = new System.Drawing.Point(48, 395);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 5);
             this.label5.TabIndex = 18;
-            // 
-            // axWindowsMediaPlayer1
-            // 
+            
+            
+            
             this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer1.Enabled = true;
@@ -466,9 +466,9 @@ namespace Guryflix.Forms
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(677, 270);
             this.axWindowsMediaPlayer1.TabIndex = 0;
-            // 
-            // youTubePlayer
-            // 
+            
+            
+            
             this.youTubePlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.youTubePlayer.Location = new System.Drawing.Point(111, 104);
@@ -476,9 +476,9 @@ namespace Guryflix.Forms
             this.youTubePlayer.Size = new System.Drawing.Size(677, 270);
             this.youTubePlayer.TabIndex = 50;
             this.youTubePlayer.Visible = false;
-            // 
-            // panel4
-            // 
+            
+            
+            
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.Controls.Add(this.Close);
             this.panel4.Controls.Add(this.Maximize);
@@ -487,9 +487,9 @@ namespace Guryflix.Forms
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(141, 26);
             this.panel4.TabIndex = 36;
-            // 
-            // Close
-            // 
+            
+            
+            
             this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
             this.Close.Location = new System.Drawing.Point(96, 0);
             this.Close.Name = "Close";
@@ -500,9 +500,9 @@ namespace Guryflix.Forms
             this.Close.Click += new System.EventHandler(this.closebtn_Click);
             this.Close.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
             this.Close.MouseHover += new System.EventHandler(this.Close_MouseHover);
-            // 
-            // Maximize
-            // 
+            
+            
+            
             this.Maximize.Image = ((System.Drawing.Image)(resources.GetObject("Maximize.Image")));
             this.Maximize.Location = new System.Drawing.Point(52, 0);
             this.Maximize.Name = "Maximize";
@@ -513,9 +513,9 @@ namespace Guryflix.Forms
             this.Maximize.Click += new System.EventHandler(this.maximizeBtn_Click);
             this.Maximize.MouseLeave += new System.EventHandler(this.Maximize_MouseLeave);
             this.Maximize.MouseHover += new System.EventHandler(this.Maximize_MouseHover);
-            // 
-            // Minimize
-            // 
+            
+            
+            
             this.Minimize.Image = ((System.Drawing.Image)(resources.GetObject("Minimize.Image")));
             this.Minimize.Location = new System.Drawing.Point(8, 0);
             this.Minimize.Name = "Minimize";
@@ -526,9 +526,9 @@ namespace Guryflix.Forms
             this.Minimize.Click += new System.EventHandler(this.minimizebtn_Click);
             this.Minimize.MouseLeave += new System.EventHandler(this.Minimize_MouseLeave);
             this.Minimize.MouseHover += new System.EventHandler(this.Minimize_MouseHover);
-            // 
-            // VideoPlayer
-            // 
+            
+            
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));

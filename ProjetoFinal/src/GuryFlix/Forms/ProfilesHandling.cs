@@ -13,7 +13,7 @@ namespace Guryflix.Forms
 {
     public partial class ProfilesHandling : Form
     {
-        // ? Handles External User Interactions
+        
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -25,7 +25,7 @@ namespace Guryflix.Forms
         private string[] passwords;
         const int size = 5;
 
-        // ? Handles External User Interactions
+        
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -40,11 +40,11 @@ namespace Guryflix.Forms
         private void storeProfiles()
         {
             userCount = 0;
-            // Limpar vetores
+            
             Array.Clear(profiles, 0, profiles.Length);
             Array.Clear(passwords, 0, passwords.Length);
 
-            // Resetar labels e PictureBoxes
+            
             ID1.ImageLocation = null; label1.Text = "";
             ID2.ImageLocation = null; label2.Text = "";
             ID3.ImageLocation = null; label3.Text = "";

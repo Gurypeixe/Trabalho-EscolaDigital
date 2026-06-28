@@ -4,7 +4,7 @@ namespace Guryflix.Structures
 {
     class Stack
     {
-        // ? As Pointers Can't Be Used Freely in C# Thats Why Using The Array Based Implementation
+        
         int MAX = 1000000;
         public int top;
         string[] stack;
@@ -21,13 +21,13 @@ namespace Guryflix.Structures
         {
             if (top >= MAX)
             {
-                Console.WriteLine("Stack Overflow");
+                Console.WriteLine("Estouro da pilha (Stack Overflow)");
                 return false;
             }
             else
             {
                 stack[++top] = data;
-                Console.WriteLine("{0} has been Pushed!", stack[top]);
+                Console.WriteLine("{0} foi adicionado à pilha (Pushed)!", stack[top]);
                 return true;
             }
         }
@@ -35,21 +35,21 @@ namespace Guryflix.Structures
         internal void Pop()
         {
             if (top < 0)
-                Console.WriteLine("Stack Underflow");
+                Console.WriteLine("Esvaziamento da pilha (Stack Underflow)");
             else
-            //Console.WriteLine("{0} has been popped!", stack[top--]);
+            
             {
-                Console.WriteLine("{0} has been popped!", stack[top--]);
+                Console.WriteLine("{0} foi removido da pilha (Popped)!", stack[top--]);
             }
         }
 
         internal string Peek()
         {
             if (top < 0)
-                Console.WriteLine("Stack Underflow");
+                Console.WriteLine("Esvaziamento da pilha (Stack Underflow)");
             else
             {
-                //Console.WriteLine("The topmost element of Stack is : {0}", stack[top]);
+                
                 return stack[top];
             }
             return "";
@@ -58,10 +58,10 @@ namespace Guryflix.Structures
         internal void PrintStack()
         {
             if (top < 0)
-                Console.WriteLine("Stack Underflow");
+                Console.WriteLine("Esvaziamento da pilha (Stack Underflow)");
             else
             {
-                Console.WriteLine("Items in the Stack are :");
+                Console.WriteLine("Os itens na pilha são:");
                 for (int i = top; i >= 0; i--)
                     Console.WriteLine(stack[i]);
             }

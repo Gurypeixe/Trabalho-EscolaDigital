@@ -190,6 +190,9 @@
     <EmbeddedResource Include="Forms\AccountInfo.resx">
       <DependentUpon>AccountInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminPanel.resx">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LikedVideos.resx">
       <DependentUpon>LikedVideos.cs</DependentUpon>
     </EmbeddedResource>

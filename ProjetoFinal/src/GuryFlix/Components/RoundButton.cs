@@ -1,4 +1,4 @@
-//* Special Class For Adding Feature For A New Type Of Button
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -42,7 +42,7 @@ namespace Guryflix.Components
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Brush brush = new SolidBrush(_isHovering ? _onHoverBorderColor : _borderColor);
 
-            //Border
+            
             g.FillEllipse(brush, 0, 0, Height, Height);
             g.FillEllipse(brush, Width - Height, 0, Height, Height);
             g.FillRectangle(brush, Height / 2, 0, Width - Height, Height);
@@ -50,7 +50,7 @@ namespace Guryflix.Components
             brush.Dispose();
             brush = new SolidBrush(_isHovering ? _onHoverButtonColor : _buttonColor);
 
-            //Inner part. Button itself
+            
             g.FillEllipse(brush, _borderThicknessByTwo, _borderThicknessByTwo, Height - _borderThickness,
                 Height - _borderThickness);
             g.FillEllipse(brush, (Width - Height) + _borderThicknessByTwo, _borderThicknessByTwo,
@@ -61,7 +61,7 @@ namespace Guryflix.Components
             brush.Dispose();
             brush = new SolidBrush(_isHovering ? _onHoverTextColor : _textColor);
 
-            //Button Text
+            
             SizeF stringSize = g.MeasureString(Text, Font);
             g.DrawString(Text, Font, brush, (Width - stringSize.Width) / 2, (Height - stringSize.Height) / 2);
         }

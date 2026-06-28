@@ -11,7 +11,7 @@ namespace Guryflix.Forms
 {
     public partial class LoginForm : Form
     {
-        // ? Handles External User Interactions
+        
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -47,7 +47,7 @@ namespace Guryflix.Forms
             resetEntries();
         }
 
-        // ? A Function That Acts As A Gate Keeper To Proceed Towards The Next Function
+        
         private void login()
         {
             string ID = userIDBox.Text;
@@ -65,7 +65,7 @@ namespace Guryflix.Forms
             passwordBox.Text = "";
         }
 
-        // ? A Utility Funtion That Display The Input Is Right/Wrong
+        
         private void setStatus(int statusNumber, bool setStatus, string message)
         {
             string imageLocation = Environment.CurrentDirectory + @"\Custom UI\UI Icons\";
@@ -153,7 +153,7 @@ namespace Guryflix.Forms
             return false;
         }
 
-        // ? Consists Of ShortCut Keys In Password Input Box
+        
         private void passwordBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)

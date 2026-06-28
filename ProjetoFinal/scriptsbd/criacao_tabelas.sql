@@ -12,7 +12,8 @@ BEGIN
     CREATE TABLE contas (
         id INT IDENTITY(1,1) PRIMARY KEY,
         nome_utilizador VARCHAR(150) UNIQUE NOT NULL,
-        senha_hash VARCHAR(255) NOT NULL
+        senha_hash VARCHAR(255) NOT NULL,
+        admin INT DEFAULT 0 NOT NULL
     );
 END
 GO

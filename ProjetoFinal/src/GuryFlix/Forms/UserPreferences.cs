@@ -60,7 +60,7 @@ namespace Guryflix.Forms
                 count++;
             }
         }
-        // ? Boolean Type Refers to True if Selected & False For Unselected 
+        
         private void setIDImage(int index, bool type)
         {
             string imageLocation = Environment.CurrentDirectory + @"\Data\Movie Titles\Genre Icons\";

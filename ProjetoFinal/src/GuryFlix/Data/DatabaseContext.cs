@@ -38,7 +38,7 @@ namespace Guryflix.Data
                     using (SqlConnection conn = new SqlConnection(connStr))
                     {
                         conn.Open();
-                        // Constrói a string de ligação final substituindo master por guryflix
+                        
                         string baseConn = connStr.Replace("Database=master;", "Database=guryflix;");
                         _activeConnectionString = baseConn;
                         return _activeConnectionString;
@@ -46,11 +46,11 @@ namespace Guryflix.Data
                 }
                 catch
                 {
-                    // Tenta o próximo servidor SQL
+                    
                 }
             }
 
-            // Fallback padrão se nada for detetado
+            
             _activeConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;";
             return _activeConnectionString;
         }
@@ -61,7 +61,7 @@ namespace Guryflix.Data
             {
                 string activeMasterConnStr = GetActiveConnectionString().Replace("Database=guryflix;", "Database=master;");
                 
-                // 1. Criar a base de dados guryflix se não existir
+                
                 using (SqlConnection conn = new SqlConnection(activeMasterConnStr))
                 {
                     conn.Open();
@@ -72,23 +72,34 @@ namespace Guryflix.Data
                     }
                 }
 
-                // 2. Criar as tabelas na base de dados guryflix se não existirem
+                
                 string guryflixConnStr = GetActiveConnectionString();
                 using (SqlConnection conn = new SqlConnection(guryflixConnStr))
                 {
                     conn.Open();
 
-                    // Tabela contas
+                    
                     string createContasTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[contas]') AND type in (N'U'))
                         CREATE TABLE contas (
                             id INT IDENTITY(1,1) PRIMARY KEY,
                             nome_utilizador VARCHAR(150) UNIQUE NOT NULL,
-                            senha_hash VARCHAR(255) NOT NULL
+                            senha_hash VARCHAR(255) NOT NULL,
+                            admin INT DEFAULT 0 NOT NULL
                         );";
                     using (SqlCommand cmd = new SqlCommand(createContasTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    // Tabela perfis
+                    
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand("ALTER TABLE contas ADD admin INT DEFAULT 0 NOT NULL;", conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    catch { }
+
+                    
                     string createPerfisTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[perfis]') AND type in (N'U'))
                         CREATE TABLE perfis (
@@ -100,7 +111,7 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createPerfisTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    // Tabela preferencias
+                    
                     string createPreferenciasTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[preferencias]') AND type in (N'U'))
                         CREATE TABLE preferencias (
@@ -111,7 +122,7 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createPreferenciasTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    // Tabela historico
+                    
                     string createHistoricoTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[historico]') AND type in (N'U'))
                         CREATE TABLE historico (
@@ -122,7 +133,7 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createHistoricoTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    // Tabela videos_curtidos
+                    
                     string createVideosCurtidosTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[videos_curtidos]') AND type in (N'U'))
                         CREATE TABLE videos_curtidos (
@@ -134,7 +145,7 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createVideosCurtidosTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    // Tabela filmes
+                    
                     string createFilmesTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[filmes]') AND type in (N'U'))
                         CREATE TABLE filmes (
@@ -149,7 +160,7 @@ namespace Guryflix.Data
                     using (SqlCommand cmd = new SqlCommand(createFilmesTable, conn)) { cmd.ExecuteNonQuery(); }
                 }
 
-                // 3. Executar o Seeding
+                
                 SeedDatabase();
             }
             catch (Exception ex)
@@ -164,7 +175,7 @@ namespace Guryflix.Data
             {
                 conn.Open();
 
-                // Seed de Filmes
+                
                 int movieCount = 0;
                 using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM filmes;", conn))
                 {
@@ -240,7 +251,7 @@ namespace Guryflix.Data
                     }
                 }
 
-                // Seed de Contas e Perfis Existentes nos ficheiros .txt
+                
                 int accountsCount = 0;
                 using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM contas;", conn))
                 {
@@ -269,7 +280,7 @@ namespace Guryflix.Data
                             string insertConta = @"
                                 IF NOT EXISTS (SELECT 1 FROM contas WHERE nome_utilizador = @user)
                                 BEGIN
-                                    INSERT INTO contas (nome_utilizador, senha_hash) VALUES (@user, @hash);
+                                    INSERT INTO contas (nome_utilizador, senha_hash, admin) VALUES (@user, @hash, @isAdmin);
                                     SELECT SCOPE_IDENTITY();
                                 END
                                 ELSE
@@ -280,6 +291,7 @@ namespace Guryflix.Data
                             {
                                 cmd.Parameters.AddWithValue("@user", username);
                                 cmd.Parameters.AddWithValue("@hash", passHash);
+                                cmd.Parameters.AddWithValue("@isAdmin", username.Equals("admin", StringComparison.OrdinalIgnoreCase) ? 1 : 0);
                                 object res = cmd.ExecuteScalar();
                                 if (res != null) int.TryParse(res.ToString(), out contaId);
                             }
@@ -393,9 +405,9 @@ namespace Guryflix.Data
             }
         }
 
-        // ==========================================
-        // MÉTODOS DE SUPORTE ÀS OPERAÇÕES DA APP
-        // ==========================================
+        
+        
+        
 
         public static bool AccountExists(string username)
         {
@@ -523,7 +535,7 @@ namespace Guryflix.Data
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    // Obter ID da conta
+                    
                     int contaId = 0;
                     using (SqlCommand cmd = new SqlCommand("SELECT id FROM contas WHERE nome_utilizador = @user;", conn))
                     {
@@ -590,14 +602,14 @@ namespace Guryflix.Data
                 conn.Open();
                 int pid = GetProfileId(conn, accountUsername, profileName);
 
-                // Limpar antigas
+                
                 using (SqlCommand cmd = new SqlCommand("DELETE FROM preferencias WHERE perfil_id = @pid;", conn))
                 {
                     cmd.Parameters.AddWithValue("@pid", pid);
                     cmd.ExecuteNonQuery();
                 }
 
-                // Inserir novas
+                
                 foreach (string genre in genres)
                 {
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO preferencias (perfil_id, genero) VALUES (@pid, @genre);", conn))
@@ -836,6 +848,29 @@ namespace Guryflix.Data
                     return res != null ? res.ToString() : "";
                 }
             }
+        }
+
+        public static bool IsAccountAdmin(string username)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT admin FROM contas WHERE nome_utilizador = @user;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@user", username);
+                        object res = cmd.ExecuteScalar();
+                        if (res != null)
+                        {
+                            int isAdmin = Convert.ToInt32(res);
+                            return isAdmin == 1;
+                        }
+                    }
+                }
+            }
+            catch { }
+            return false;
         }
     }
 }

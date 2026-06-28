@@ -1,6 +1,4 @@
-/**
-    ** A Special Class Made For Handling Different Type Of File Handling Scenarios
- */
+
 using System.IO;
 using System;
 
@@ -8,13 +6,13 @@ using Guryflix.Structures;
 
 namespace Guryflix.Utilities
 {
-    // A class Which Handles Everything Related To File Handling
-    // Features
-    /// <summary>
-    /// * Single File Handling
-    /// * Multi File Handling
-    /// * Bugs & Exception Removal Helping Functions
-    /// </summary>
+    
+    
+    
+    
+    
+    
+    
     class FileHandlingUtilites
     {
         private int numberOfFiles;
@@ -27,8 +25,8 @@ namespace Guryflix.Utilities
             numberOfLines = 0;
             content = "";
         }
-        // For Single File Handling
-        // START Utitlities
+        
+        
         public LinkedList importToLinkedList(string fileDirectory)
         {
             LinkedList obj = new LinkedList();
@@ -152,10 +150,10 @@ namespace Guryflix.Utilities
         }
 
 
-        // END Utitlities
+        
 
-        // For Multiple File Handling
-        // START Utitlities
+        
+        
         private void storeFileDirectoriesFromAFile(string srcFileDirectory, string destFileDirectory)
         {
             ReadData(srcFileDirectory);
@@ -168,7 +166,7 @@ namespace Guryflix.Utilities
             numberOfFiles = 0;
             defaultFileDirectory = (destFileDirectory + str);
             fileDirectories[numberOfFiles] = defaultFileDirectory;
-            //Console.WriteLine("Total Size: " + numberOfLines);
+            
             while (str != null)
             {
                 if (numberOfFiles == numberOfLines - 1)
@@ -238,12 +236,12 @@ namespace Guryflix.Utilities
             return arr;
         }
 
-        // END Utitlities
+        
 
-        // For Helpful Functions
-        // START Utitlities
+        
+        
 
-        // ? Creates A File If It Doesnt Exist
+        
         public void createFile(string path)
         {
             if (!File.Exists(path))
@@ -253,14 +251,14 @@ namespace Guryflix.Utilities
             }
         }
 
-        // ? Creates A Directory If It Doesnt Exist
+        
         public void createDirectory(string fileDirectory)
         {
             if (!Directory.Exists(fileDirectory))
                 Directory.CreateDirectory(fileDirectory);
         }
 
-        // END Utitlities
+        
 
     }
 }

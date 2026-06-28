@@ -9,7 +9,7 @@ namespace Guryflix.Forms
 {
     public partial class IntroPage : Form
     {
-        // ? Handles External User Interactions
+        
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -31,7 +31,7 @@ namespace Guryflix.Forms
             InitializeComponent();
             startIntro();
         }
-        // ? Loads The Intro Video File
+        
         void startIntro()
         {
             string vidLocation = Environment.CurrentDirectory + @"\Custom UI\GuryFlix Starting Animation.mp4";
@@ -41,7 +41,7 @@ namespace Guryflix.Forms
             timer1.Start();
         }
 
-        // ? Count The Duration Of The Intro And Proceeds TO The Next Form After The Designated Time
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
             double duration = 4;

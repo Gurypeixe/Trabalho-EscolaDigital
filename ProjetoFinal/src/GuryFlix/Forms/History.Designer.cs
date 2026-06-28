@@ -2,15 +2,15 @@ namespace Guryflix.Forms
 {
     partial class History
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        
+        
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        
+        
+        
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +22,10 @@ namespace Guryflix.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        
+        
+        
+        
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(History));
@@ -54,9 +54,9 @@ namespace Guryflix.Forms
             ((System.ComponentModel.ISupportInitialize)(this.Maximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Minimize)).BeginInit();
             this.SuspendLayout();
-            // 
-            // listView1
-            // 
+            
+            
+            
             this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -72,9 +72,9 @@ namespace Guryflix.Forms
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
-            // 
-            // panel3
-            // 
+            
+            
+            
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel3.BackColor = System.Drawing.Color.Transparent;
@@ -89,9 +89,9 @@ namespace Guryflix.Forms
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(114, 578);
             this.panel3.TabIndex = 25;
-            // 
-            // likedVideosBtn
-            // 
+            
+            
+            
             this.likedVideosBtn.Image = ((System.Drawing.Image)(resources.GetObject("likedVideosBtn.Image")));
             this.likedVideosBtn.Location = new System.Drawing.Point(49, 276);
             this.likedVideosBtn.Name = "likedVideosBtn";
@@ -102,9 +102,9 @@ namespace Guryflix.Forms
             this.likedVideosBtn.Click += new System.EventHandler(this.likedVideosBtn_Click);
             this.likedVideosBtn.MouseLeave += new System.EventHandler(this.likedVideosBtn_MouseLeave);
             this.likedVideosBtn.MouseHover += new System.EventHandler(this.likedVideosBtn_MouseHover);
-            // 
-            // menuItem1
-            // 
+            
+            
+            
             this.menuItem1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.menuItem1.FlatAppearance.BorderSize = 0;
             this.menuItem1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -116,9 +116,9 @@ namespace Guryflix.Forms
             this.menuItem1.TabIndex = 7;
             this.menuItem1.UseVisualStyleBackColor = false;
             this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
-            // 
-            // settingsBtn
-            // 
+            
+            
+            
             this.settingsBtn.Image = ((System.Drawing.Image)(resources.GetObject("settingsBtn.Image")));
             this.settingsBtn.Location = new System.Drawing.Point(32, 498);
             this.settingsBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -131,9 +131,9 @@ namespace Guryflix.Forms
             this.settingsBtn.Click += new System.EventHandler(this.settingsBtn_Click);
             this.settingsBtn.MouseLeave += new System.EventHandler(this.settingsBtn_MouseLeave);
             this.settingsBtn.MouseHover += new System.EventHandler(this.settingsBtn_MouseHover);
-            // 
-            // profileBtn
-            // 
+            
+            
+            
             this.profileBtn.Image = ((System.Drawing.Image)(resources.GetObject("profileBtn.Image")));
             this.profileBtn.Location = new System.Drawing.Point(48, 328);
             this.profileBtn.Name = "profileBtn";
@@ -144,9 +144,9 @@ namespace Guryflix.Forms
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             this.profileBtn.MouseLeave += new System.EventHandler(this.profileBtn_MouseLeave);
             this.profileBtn.MouseHover += new System.EventHandler(this.profileBtn_MouseHover);
-            // 
-            // historyBtn
-            // 
+            
+            
+            
             this.historyBtn.Image = ((System.Drawing.Image)(resources.GetObject("historyBtn.Image")));
             this.historyBtn.Location = new System.Drawing.Point(48, 223);
             this.historyBtn.Name = "historyBtn";
@@ -154,9 +154,9 @@ namespace Guryflix.Forms
             this.historyBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.historyBtn.TabIndex = 2;
             this.historyBtn.TabStop = false;
-            // 
-            // searchBtn
-            // 
+            
+            
+            
             this.searchBtn.Image = ((System.Drawing.Image)(resources.GetObject("searchBtn.Image")));
             this.searchBtn.Location = new System.Drawing.Point(48, 172);
             this.searchBtn.Name = "searchBtn";
@@ -167,9 +167,9 @@ namespace Guryflix.Forms
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             this.searchBtn.MouseLeave += new System.EventHandler(this.searchBtn_MouseLeave);
             this.searchBtn.MouseHover += new System.EventHandler(this.searchBtn_MouseHover);
-            // 
-            // homeBtn
-            // 
+            
+            
+            
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
             this.homeBtn.Location = new System.Drawing.Point(48, 114);
             this.homeBtn.Name = "homeBtn";
@@ -180,9 +180,9 @@ namespace Guryflix.Forms
             this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
             this.homeBtn.MouseLeave += new System.EventHandler(this.homeBtn_MouseLeave);
             this.homeBtn.MouseHover += new System.EventHandler(this.homeBtn_MouseHover);
-            // 
-            // panel1
-            // 
+            
+            
+            
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Controls.Add(this.Close);
             this.panel1.Controls.Add(this.Maximize);
@@ -191,9 +191,9 @@ namespace Guryflix.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(141, 26);
             this.panel1.TabIndex = 36;
-            // 
-            // Close
-            // 
+            
+            
+            
             this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
             this.Close.Location = new System.Drawing.Point(96, 0);
             this.Close.Name = "Close";
@@ -204,9 +204,9 @@ namespace Guryflix.Forms
             this.Close.Click += new System.EventHandler(this.closebtn_Click);
             this.Close.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
             this.Close.MouseHover += new System.EventHandler(this.Close_MouseHover);
-            // 
-            // Maximize
-            // 
+            
+            
+            
             this.Maximize.Image = ((System.Drawing.Image)(resources.GetObject("Maximize.Image")));
             this.Maximize.Location = new System.Drawing.Point(52, 0);
             this.Maximize.Name = "Maximize";
@@ -217,9 +217,9 @@ namespace Guryflix.Forms
             this.Maximize.Click += new System.EventHandler(this.maximizeBtn_Click);
             this.Maximize.MouseLeave += new System.EventHandler(this.Maximize_MouseLeave);
             this.Maximize.MouseHover += new System.EventHandler(this.Maximize_MouseHover);
-            // 
-            // Minimize
-            // 
+            
+            
+            
             this.Minimize.Image = ((System.Drawing.Image)(resources.GetObject("Minimize.Image")));
             this.Minimize.Location = new System.Drawing.Point(8, 0);
             this.Minimize.Name = "Minimize";
@@ -230,9 +230,9 @@ namespace Guryflix.Forms
             this.Minimize.Click += new System.EventHandler(this.minimizebtn_Click);
             this.Minimize.MouseLeave += new System.EventHandler(this.Minimize_MouseLeave);
             this.Minimize.MouseHover += new System.EventHandler(this.Minimize_MouseHover);
-            // 
-            // History
-            // 
+            
+            
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));

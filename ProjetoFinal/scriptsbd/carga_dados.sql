@@ -3,13 +3,13 @@ GO
 
 IF NOT EXISTS (SELECT 1 FROM contas WHERE nome_utilizador = 'admin')
 BEGIN
-    INSERT INTO contas (nome_utilizador, senha_hash) VALUES ('admin', '$2a$11$f5.yH7K4T.G3b16JjG0W1eH6o7KxV0jH6o7KxV0jH6o7KxV0jH6o7');
+    INSERT INTO contas (nome_utilizador, senha_hash, admin) VALUES ('admin', '$2a$11$f5.yH7K4T.G3b16JjG0W1eH6o7KxV0jH6o7KxV0jH6o7KxV0jH6o7', 1);
 END
 GO
 
 IF NOT EXISTS (SELECT 1 FROM contas WHERE nome_utilizador = 'user')
 BEGIN
-    INSERT INTO contas (nome_utilizador, senha_hash) VALUES ('user', '$2a$11$f5.yH7K4T.G3b16JjG0W1eH6o7KxV0jH6o7KxV0jH6o7KxV0jH6o7');
+    INSERT INTO contas (nome_utilizador, senha_hash, admin) VALUES ('user', '$2a$11$f5.yH7K4T.G3b16JjG0W1eH6o7KxV0jH6o7KxV0jH6o7KxV0jH6o7', 0);
 END
 GO
 

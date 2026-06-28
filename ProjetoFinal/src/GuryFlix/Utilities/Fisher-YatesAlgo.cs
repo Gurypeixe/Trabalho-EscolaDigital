@@ -1,7 +1,4 @@
-/**
-    ** Um algoritmo especial usado para o sistema de recomendações da Guryflix que mimetiza o comportamento do Youtube
-    ** com base em preferências
- */
+
 using System;
 
 using Guryflix.Structures;

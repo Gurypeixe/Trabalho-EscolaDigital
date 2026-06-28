@@ -19,14 +19,14 @@ namespace Guryflix.Structures
         {
             if (rear == max - 1)
             {
-                Console.WriteLine("Queue Overflow");
+                Console.WriteLine("Estouro da fila (Queue Overflow)");
                 return;
             }
             else
             {
                 rear++;
                 fileNames[rear] = fileName;
-                Console.WriteLine("File Names {0} Enqueud!", rear);
+                Console.WriteLine("Nomes de ficheiros {0} adicionados à fila!", rear);
             }
         }
 
@@ -34,28 +34,28 @@ namespace Guryflix.Structures
         {
             if (front == rear + 1)
             {
-                Console.WriteLine("Queue is Empty");
+                Console.WriteLine("A fila está vazia");
                 return "";
             }
             string fileName = fileNames[front];
-            Console.WriteLine("File Names {0} Dequed!", front);
+            Console.WriteLine("Nomes de ficheiros {0} removidos da fila!", front);
             front++;
             return fileName;
         }
 
-        // Function to print queue. 
+        
         public void printQueue()
         {
             if (front == rear + 1)
             {
-                Console.WriteLine("Queue is Empty");
+                Console.WriteLine("A fila está vazia");
                 return;
             }
             else
             {
                 for (int i = front; i <= rear; i++)
                 {
-                    Console.WriteLine("File Name {0} Enqueud!", i);
+                    Console.WriteLine("Nome do ficheiro {0} adicionado à fila!", i);
                 }
             }
         }

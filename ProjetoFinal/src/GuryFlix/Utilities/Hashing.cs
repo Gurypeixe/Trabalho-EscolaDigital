@@ -1,7 +1,4 @@
-/**
-    ** An Algorithm Used For Searching Capabilites Taking Minimal Time To Scrap Through And Search
-    ** The Content
- */
+
 using System;
 using Guryflix.Structures;
 
@@ -33,9 +30,9 @@ namespace Guryflix.Utilities
                 ASCIIVal = 97;
             else return;
 
-            index = 0; // Garantir que reiniciamos o index da pesquisa
+            index = 0; 
             for (int i = 0; i < size; i++)
-                finalstring[i] = null; // Limpar pesquisas antigas
+                finalstring[i] = null; 
 
             for (int i = 0; i < size; i++)
             {

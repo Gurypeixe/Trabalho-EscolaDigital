@@ -22,10 +22,61 @@ namespace Guryflix.Forms
 
         private void AdminPanel_Load(object sender, EventArgs e)
         {
+            
+            StyleDataGridView(dgvMovies);
+            StyleDataGridView(dgvUsers);
+            StyleDataGridView(dgvHistory);
+            StyleDataGridView(dgvLikes);
+
             LoadMovies();
             LoadUsers();
             LoadHistory();
             LoadLikes();
+        }
+
+        private void StyleDataGridView(DataGridView dgv)
+        {
+            dgv.EnableHeadersVisualStyles = false;
+            
+            
+            dgv.BackgroundColor = System.Drawing.Color.FromArgb(32, 32, 32);
+            dgv.GridColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            
+            
+            dgv.DefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(45, 45, 45);
+            dgv.DefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            dgv.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Chocolate;
+            dgv.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            dgv.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular);
+            
+            
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(38, 38, 38);
+            dgv.AlternatingRowsDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            dgv.AlternatingRowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Chocolate;
+            dgv.AlternatingRowsDefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            
+            
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(20, 20, 20);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.Chocolate;
+            dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(20, 20, 20);
+            dgv.ColumnHeadersDefaultCellStyle.SelectionForeColor = System.Drawing.Color.Chocolate;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            
+            
+            dgv.RowHeadersDefaultCellStyle.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
+            dgv.RowHeadersDefaultCellStyle.ForeColor = System.Drawing.Color.White;
+            dgv.RowHeadersDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Chocolate;
+            dgv.RowHeadersDefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
+            
+            
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgv.ColumnHeadersHeight = 30;
+            dgv.RowTemplate.Height = 28;
+            
+            
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void btnBack_Click(object sender, EventArgs e)

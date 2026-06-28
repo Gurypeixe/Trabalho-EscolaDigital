@@ -57,9 +57,9 @@ namespace Guryflix.Forms
             this.tabPageLikes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLikes)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
+            
+            
+            
             this.tabControl1.Controls.Add(this.tabPageMovies);
             this.tabControl1.Controls.Add(this.tabPageUsers);
             this.tabControl1.Controls.Add(this.tabPageHistory);
@@ -71,9 +71,9 @@ namespace Guryflix.Forms
             this.tabControl1.Size = new System.Drawing.Size(910, 480);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // tabPageMovies
-            // 
+            
+            
+            
             this.tabPageMovies.BackColor = System.Drawing.Color.FromArgb(((byte)(28)), ((byte)(28)), ((byte)(28)));
             this.tabPageMovies.Controls.Add(this.btnClearMovieFields);
             this.tabPageMovies.Controls.Add(this.btnDeleteMovie);
@@ -99,9 +99,9 @@ namespace Guryflix.Forms
             this.tabPageMovies.Size = new System.Drawing.Size(902, 450);
             this.tabPageMovies.TabIndex = 0;
             this.tabPageMovies.Text = "Filmes";
-            // 
-            // btnClearMovieFields
-            // 
+            
+            
+            
             this.btnClearMovieFields.BackColor = System.Drawing.Color.FromArgb(((byte)(60)), ((byte)(60)), ((byte)(60)));
             this.btnClearMovieFields.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearMovieFields.ForeColor = System.Drawing.Color.White;
@@ -112,9 +112,9 @@ namespace Guryflix.Forms
             this.btnClearMovieFields.Text = "Limpar";
             this.btnClearMovieFields.UseVisualStyleBackColor = false;
             this.btnClearMovieFields.Click += new System.EventHandler(this.btnClearMovieFields_Click);
-            // 
-            // btnDeleteMovie
-            // 
+            
+            
+            
             this.btnDeleteMovie.BackColor = System.Drawing.Color.FromArgb(((byte)(229)), ((byte)(9)), ((byte)(20)));
             this.btnDeleteMovie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteMovie.ForeColor = System.Drawing.Color.White;
@@ -125,9 +125,9 @@ namespace Guryflix.Forms
             this.btnDeleteMovie.Text = "Eliminar";
             this.btnDeleteMovie.UseVisualStyleBackColor = false;
             this.btnDeleteMovie.Click += new System.EventHandler(this.btnDeleteMovie_Click);
-            // 
-            // btnUpdateMovie
-            // 
+            
+            
+            
             this.btnUpdateMovie.BackColor = System.Drawing.Color.Chocolate;
             this.btnUpdateMovie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateMovie.ForeColor = System.Drawing.Color.White;
@@ -138,9 +138,9 @@ namespace Guryflix.Forms
             this.btnUpdateMovie.Text = "Atualizar";
             this.btnUpdateMovie.UseVisualStyleBackColor = false;
             this.btnUpdateMovie.Click += new System.EventHandler(this.btnUpdateMovie_Click);
-            // 
-            // btnAddMovie
-            // 
+            
+            
+            
             this.btnAddMovie.BackColor = System.Drawing.Color.FromArgb(((byte)(0)), ((byte)(120)), ((byte)(215)));
             this.btnAddMovie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddMovie.ForeColor = System.Drawing.Color.White;
@@ -151,107 +151,107 @@ namespace Guryflix.Forms
             this.btnAddMovie.Text = "Adicionar";
             this.btnAddMovie.UseVisualStyleBackColor = false;
             this.btnAddMovie.Click += new System.EventHandler(this.btnAddMovie_Click);
-            // 
-            // txtVideoUrl
-            // 
+            
+            
+            
             this.txtVideoUrl.Location = new System.Drawing.Point(462, 355);
             this.txtVideoUrl.Name = "txtVideoUrl";
             this.txtVideoUrl.Size = new System.Drawing.Size(418, 25);
             this.txtVideoUrl.TabIndex = 12;
-            // 
-            // lblVideoUrl
-            // 
+            
+            
+            
             this.lblVideoUrl.AutoSize = true;
             this.lblVideoUrl.Location = new System.Drawing.Point(459, 335);
             this.lblVideoUrl.Name = "lblVideoUrl";
             this.lblVideoUrl.Size = new System.Drawing.Size(126, 17);
             this.lblVideoUrl.TabIndex = 11;
             this.lblVideoUrl.Text = "URL do Video (YT):";
-            // 
-            // txtSynopsis
-            // 
+            
+            
+            
             this.txtSynopsis.Location = new System.Drawing.Point(462, 230);
             this.txtSynopsis.Multiline = true;
             this.txtSynopsis.Name = "txtSynopsis";
             this.txtSynopsis.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtSynopsis.Size = new System.Drawing.Size(418, 90);
             this.txtSynopsis.TabIndex = 10;
-            // 
-            // lblSynopsis
-            // 
+            
+            
+            
             this.lblSynopsis.AutoSize = true;
             this.lblSynopsis.Location = new System.Drawing.Point(459, 210);
             this.lblSynopsis.Name = "lblSynopsis";
             this.lblSynopsis.Size = new System.Drawing.Size(61, 17);
             this.lblSynopsis.TabIndex = 9;
             this.lblSynopsis.Text = "Sinopse:";
-            // 
-            // txtAffinity
-            // 
+            
+            
+            
             this.txtAffinity.Location = new System.Drawing.Point(462, 170);
             this.txtAffinity.Name = "txtAffinity";
             this.txtAffinity.Size = new System.Drawing.Size(418, 25);
             this.txtAffinity.TabIndex = 8;
-            // 
-            // lblAffinity
-            // 
+            
+            
+            
             this.lblAffinity.AutoSize = true;
             this.lblAffinity.Location = new System.Drawing.Point(459, 150);
             this.lblAffinity.Name = "lblAffinity";
             this.lblAffinity.Size = new System.Drawing.Size(70, 17);
             this.lblAffinity.TabIndex = 7;
             this.lblAffinity.Text = "Afinidade:";
-            // 
-            // txtYear
-            // 
+            
+            
+            
             this.txtYear.Location = new System.Drawing.Point(462, 115);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(418, 25);
             this.txtYear.TabIndex = 6;
-            // 
-            // lblYear
-            // 
+            
+            
+            
             this.lblYear.AutoSize = true;
             this.lblYear.Location = new System.Drawing.Point(459, 95);
             this.lblYear.Name = "lblYear";
             this.lblYear.Size = new System.Drawing.Size(37, 17);
             this.lblYear.TabIndex = 5;
             this.lblYear.Text = "Ano:";
-            // 
-            // txtGenre
-            // 
+            
+            
+            
             this.txtGenre.Location = new System.Drawing.Point(462, 65);
             this.txtGenre.Name = "txtGenre";
             this.txtGenre.Size = new System.Drawing.Size(418, 25);
             this.txtGenre.TabIndex = 4;
-            // 
-            // lblGenre
-            // 
+            
+            
+            
             this.lblGenre.AutoSize = true;
             this.lblGenre.Location = new System.Drawing.Point(459, 45);
             this.lblGenre.Name = "lblGenre";
             this.lblGenre.Size = new System.Drawing.Size(56, 17);
             this.lblGenre.TabIndex = 3;
             this.lblGenre.Text = "Género:";
-            // 
-            // txtTitle
-            // 
+            
+            
+            
             this.txtTitle.Location = new System.Drawing.Point(462, 17);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(418, 25);
             this.txtTitle.TabIndex = 2;
-            // 
-            // lblTitle
-            // 
+            
+            
+            
             this.lblTitle.AutoSize = true;
             this.lblTitle.Location = new System.Drawing.Point(459, -3);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(48, 17);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Título:";
-            // 
-            // dgvMovies
-            // 
+            
+            
+            
             this.dgvMovies.AllowUserToAddRows = false;
             this.dgvMovies.AllowUserToDeleteRows = false;
             this.dgvMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -263,9 +263,9 @@ namespace Guryflix.Forms
             this.dgvMovies.Size = new System.Drawing.Size(437, 438);
             this.dgvMovies.TabIndex = 0;
             this.dgvMovies.SelectionChanged += new System.EventHandler(this.dgvMovies_SelectionChanged);
-            // 
-            // tabPageUsers
-            // 
+            
+            
+            
             this.tabPageUsers.BackColor = System.Drawing.Color.FromArgb(((byte)(28)), ((byte)(28)), ((byte)(28)));
             this.tabPageUsers.Controls.Add(this.btnDeleteUser);
             this.tabPageUsers.Controls.Add(this.dgvUsers);
@@ -276,9 +276,9 @@ namespace Guryflix.Forms
             this.tabPageUsers.Size = new System.Drawing.Size(902, 450);
             this.tabPageUsers.TabIndex = 1;
             this.tabPageUsers.Text = "Utilizadores";
-            // 
-            // btnDeleteUser
-            // 
+            
+            
+            
             this.btnDeleteUser.BackColor = System.Drawing.Color.FromArgb(((byte)(229)), ((byte)(9)), ((byte)(20)));
             this.btnDeleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteUser.Location = new System.Drawing.Point(746, 17);
@@ -288,9 +288,9 @@ namespace Guryflix.Forms
             this.btnDeleteUser.Text = "Eliminar Conta";
             this.btnDeleteUser.UseVisualStyleBackColor = false;
             this.btnDeleteUser.Click += new System.EventHandler(this.btnDeleteUser_Click);
-            // 
-            // dgvUsers
-            // 
+            
+            
+            
             this.dgvUsers.AllowUserToAddRows = false;
             this.dgvUsers.AllowUserToDeleteRows = false;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -301,9 +301,9 @@ namespace Guryflix.Forms
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsers.Size = new System.Drawing.Size(720, 438);
             this.dgvUsers.TabIndex = 0;
-            // 
-            // tabPageHistory
-            // 
+            
+            
+            
             this.tabPageHistory.BackColor = System.Drawing.Color.FromArgb(((byte)(28)), ((byte)(28)), ((byte)(28)));
             this.tabPageHistory.Controls.Add(this.btnClearHistory);
             this.tabPageHistory.Controls.Add(this.dgvHistory);
@@ -314,9 +314,9 @@ namespace Guryflix.Forms
             this.tabPageHistory.Size = new System.Drawing.Size(902, 450);
             this.tabPageHistory.TabIndex = 2;
             this.tabPageHistory.Text = "Histórico";
-            // 
-            // btnClearHistory
-            // 
+            
+            
+            
             this.btnClearHistory.BackColor = System.Drawing.Color.FromArgb(((byte)(229)), ((byte)(9)), ((byte)(20)));
             this.btnClearHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearHistory.Location = new System.Drawing.Point(746, 17);
@@ -326,9 +326,9 @@ namespace Guryflix.Forms
             this.btnClearHistory.Text = "Limpar Registo";
             this.btnClearHistory.UseVisualStyleBackColor = false;
             this.btnClearHistory.Click += new System.EventHandler(this.btnClearHistory_Click);
-            // 
-            // dgvHistory
-            // 
+            
+            
+            
             this.dgvHistory.AllowUserToAddRows = false;
             this.dgvHistory.AllowUserToDeleteRows = false;
             this.dgvHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -339,9 +339,9 @@ namespace Guryflix.Forms
             this.dgvHistory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvHistory.Size = new System.Drawing.Size(720, 438);
             this.dgvHistory.TabIndex = 1;
-            // 
-            // tabPageLikes
-            // 
+            
+            
+            
             this.tabPageLikes.BackColor = System.Drawing.Color.FromArgb(((byte)(28)), ((byte)(28)), ((byte)(28)));
             this.tabPageLikes.Controls.Add(this.btnRemoveLike);
             this.tabPageLikes.Controls.Add(this.dgvLikes);
@@ -352,9 +352,9 @@ namespace Guryflix.Forms
             this.tabPageLikes.Size = new System.Drawing.Size(902, 450);
             this.tabPageLikes.TabIndex = 3;
             this.tabPageLikes.Text = "Curtidos";
-            // 
-            // btnRemoveLike
-            // 
+            
+            
+            
             this.btnRemoveLike.BackColor = System.Drawing.Color.FromArgb(((byte)(229)), ((byte)(9)), ((byte)(20)));
             this.btnRemoveLike.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveLike.Location = new System.Drawing.Point(746, 17);
@@ -364,9 +364,9 @@ namespace Guryflix.Forms
             this.btnRemoveLike.Text = "Remover Curtida";
             this.btnRemoveLike.UseVisualStyleBackColor = false;
             this.btnRemoveLike.Click += new System.EventHandler(this.btnRemoveLike_Click);
-            // 
-            // dgvLikes
-            // 
+            
+            
+            
             this.dgvLikes.AllowUserToAddRows = false;
             this.dgvLikes.AllowUserToDeleteRows = false;
             this.dgvLikes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -377,9 +377,9 @@ namespace Guryflix.Forms
             this.dgvLikes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLikes.Size = new System.Drawing.Size(720, 438);
             this.dgvLikes.TabIndex = 1;
-            // 
-            // btnBack
-            // 
+            
+            
+            
             this.btnBack.BackColor = System.Drawing.Color.FromArgb(((byte)(40)), ((byte)(40)), ((byte)(40)));
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -391,9 +391,9 @@ namespace Guryflix.Forms
             this.btnBack.Text = "Voltar";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // lblHeader
-            // 
+            
+            
+            
             this.lblHeader.AutoSize = true;
             this.lblHeader.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeader.ForeColor = System.Drawing.Color.FromArgb(((byte)(229)), ((byte)(9)), ((byte)(20)));
@@ -402,9 +402,9 @@ namespace Guryflix.Forms
             this.lblHeader.Size = new System.Drawing.Size(287, 32);
             this.lblHeader.TabIndex = 2;
             this.lblHeader.Text = "Painel de Administração";
-            // 
-            // AdminPanel
-            // 
+            
+            
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((byte)(17)), ((byte)(17)), ((byte)(17)));

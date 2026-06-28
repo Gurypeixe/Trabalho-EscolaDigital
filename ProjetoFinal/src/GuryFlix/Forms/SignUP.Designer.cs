@@ -2,15 +2,15 @@ namespace Guryflix.Forms
 {
     partial class SignUP
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        
+        
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        
+        
+        
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +22,10 @@ namespace Guryflix.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        
+        
+        
+        
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUP));
@@ -61,9 +61,9 @@ namespace Guryflix.Forms
             ((System.ComponentModel.ISupportInitialize)(this.Close)).BeginInit();
             this.sidePanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // resetBtn
-            // 
+            
+            
+            
             this.resetBtn.BackColor = System.Drawing.Color.Chocolate;
             this.resetBtn.FlatAppearance.BorderSize = 0;
             this.resetBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -78,9 +78,9 @@ namespace Guryflix.Forms
             this.resetBtn.Click += new System.EventHandler(this.resetBtn_Click);
             this.resetBtn.MouseLeave += new System.EventHandler(this.resetBtn_MouseLeave);
             this.resetBtn.MouseHover += new System.EventHandler(this.resetBtn_MouseHover);
-            // 
-            // signUpBtn
-            // 
+            
+            
+            
             this.signUpBtn.BackColor = System.Drawing.Color.Chocolate;
             this.signUpBtn.FlatAppearance.BorderSize = 0;
             this.signUpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -95,9 +95,9 @@ namespace Guryflix.Forms
             this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             this.signUpBtn.MouseLeave += new System.EventHandler(this.signUpBtn_MouseLeave);
             this.signUpBtn.MouseHover += new System.EventHandler(this.signUpBtn_MouseHover);
-            // 
-            // passwordBox
-            // 
+            
+            
+            
             this.passwordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
             this.passwordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.passwordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -108,9 +108,9 @@ namespace Guryflix.Forms
             this.passwordBox.TabIndex = 9;
             this.passwordBox.UseSystemPasswordChar = true;
             this.passwordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.passwordBox_MouseClick);
-            // 
-            // password
-            // 
+            
+            
+            
             this.password.AutoSize = true;
             this.password.BackColor = System.Drawing.Color.Transparent;
             this.password.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -120,9 +120,9 @@ namespace Guryflix.Forms
             this.password.Size = new System.Drawing.Size(132, 24);
             this.password.TabIndex = 8;
             this.password.Text = "Palavra-passe:";
-            // 
-            // userIDBox
-            // 
+            
+            
+            
             this.userIDBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
             this.userIDBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userIDBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -132,9 +132,9 @@ namespace Guryflix.Forms
             this.userIDBox.Size = new System.Drawing.Size(210, 16);
             this.userIDBox.TabIndex = 7;
             this.userIDBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.userIDBox_MouseClick);
-            // 
-            // userID
-            // 
+            
+            
+            
             this.userID.AutoSize = true;
             this.userID.BackColor = System.Drawing.Color.Transparent;
             this.userID.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -144,9 +144,9 @@ namespace Guryflix.Forms
             this.userID.Size = new System.Drawing.Size(91, 24);
             this.userID.TabIndex = 6;
             this.userID.Text = "Utilizador:";
-            // 
-            // confirmPasswordLabel
-            // 
+            
+            
+            
             this.confirmPasswordLabel.AutoSize = true;
             this.confirmPasswordLabel.BackColor = System.Drawing.Color.Transparent;
             this.confirmPasswordLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -156,9 +156,9 @@ namespace Guryflix.Forms
             this.confirmPasswordLabel.Size = new System.Drawing.Size(96, 24);
             this.confirmPasswordLabel.TabIndex = 12;
             this.confirmPasswordLabel.Text = "Confirmar:";
-            // 
-            // confirmPasswordBox
-            // 
+            
+            
+            
             this.confirmPasswordBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
             this.confirmPasswordBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.confirmPasswordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -170,36 +170,36 @@ namespace Guryflix.Forms
             this.confirmPasswordBox.UseSystemPasswordChar = true;
             this.confirmPasswordBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.confirmPasswordBox_MouseClick);
             this.confirmPasswordBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.confirmPasswordBox_KeyPress_1);
-            // 
-            // label1
-            // 
+            
+            
+            
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.Location = new System.Drawing.Point(440, 138);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(210, 3);
             this.label1.TabIndex = 17;
-            // 
-            // label2
-            // 
+            
+            
+            
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label2.Location = new System.Drawing.Point(440, 188);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(210, 3);
             this.label2.TabIndex = 18;
-            // 
-            // label3
-            // 
+            
+            
+            
             this.label3.BackColor = System.Drawing.Color.White;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label3.Location = new System.Drawing.Point(440, 238);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(210, 3);
             this.label3.TabIndex = 19;
-            // 
-            // pictureBox2
-            // 
+            
+            
+            
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(270, 15);
             this.pictureBox2.Name = "pictureBox2";
@@ -208,9 +208,9 @@ namespace Guryflix.Forms
             this.pictureBox2.TabIndex = 20;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox1
-            // 
+            
+            
+            
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(15, 120);
             this.pictureBox1.Name = "pictureBox1";
@@ -218,36 +218,36 @@ namespace Guryflix.Forms
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
-            // 
-            // statusSymbolID
-            // 
+            
+            
+            
             this.statusSymbolID.Location = new System.Drawing.Point(660, 112);
             this.statusSymbolID.Name = "statusSymbolID";
             this.statusSymbolID.Size = new System.Drawing.Size(30, 30);
             this.statusSymbolID.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusSymbolID.TabIndex = 22;
             this.statusSymbolID.TabStop = false;
-            // 
-            // statusSymbolPassword
-            // 
+            
+            
+            
             this.statusSymbolPassword.Location = new System.Drawing.Point(660, 162);
             this.statusSymbolPassword.Name = "statusSymbolPassword";
             this.statusSymbolPassword.Size = new System.Drawing.Size(30, 30);
             this.statusSymbolPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusSymbolPassword.TabIndex = 23;
             this.statusSymbolPassword.TabStop = false;
-            // 
-            // statusSymbolConfirmPassword
-            // 
+            
+            
+            
             this.statusSymbolConfirmPassword.Location = new System.Drawing.Point(660, 212);
             this.statusSymbolConfirmPassword.Name = "statusSymbolConfirmPassword";
             this.statusSymbolConfirmPassword.Size = new System.Drawing.Size(30, 30);
             this.statusSymbolConfirmPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.statusSymbolConfirmPassword.TabIndex = 24;
             this.statusSymbolConfirmPassword.TabStop = false;
-            // 
-            // statusID
-            // 
+            
+            
+            
             this.statusID.AutoSize = true;
             this.statusID.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusID.ForeColor = System.Drawing.Color.White;
@@ -255,9 +255,9 @@ namespace Guryflix.Forms
             this.statusID.Name = "statusID";
             this.statusID.Size = new System.Drawing.Size(0, 13);
             this.statusID.TabIndex = 25;
-            // 
-            // statusPassword
-            // 
+            
+            
+            
             this.statusPassword.AutoSize = true;
             this.statusPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusPassword.ForeColor = System.Drawing.Color.White;
@@ -265,9 +265,9 @@ namespace Guryflix.Forms
             this.statusPassword.Name = "statusPassword";
             this.statusPassword.Size = new System.Drawing.Size(0, 13);
             this.statusPassword.TabIndex = 26;
-            // 
-            // statusConfirmPassword
-            // 
+            
+            
+            
             this.statusConfirmPassword.AutoSize = true;
             this.statusConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusConfirmPassword.ForeColor = System.Drawing.Color.White;
@@ -275,18 +275,18 @@ namespace Guryflix.Forms
             this.statusConfirmPassword.Name = "statusConfirmPassword";
             this.statusConfirmPassword.Size = new System.Drawing.Size(0, 13);
             this.statusConfirmPassword.TabIndex = 27;
-            // 
-            // panel1
-            // 
+            
+            
+            
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.Close);
             this.panel1.Location = new System.Drawing.Point(659, 5);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(141, 26);
             this.panel1.TabIndex = 35;
-            // 
-            // Close
-            // 
+            
+            
+            
             this.Close.Image = ((System.Drawing.Image)(resources.GetObject("Close.Image")));
             this.Close.Location = new System.Drawing.Point(96, 0);
             this.Close.Name = "Close";
@@ -297,9 +297,9 @@ namespace Guryflix.Forms
             this.Close.Click += new System.EventHandler(this.closebtn_Click);
             this.Close.MouseLeave += new System.EventHandler(this.Close_MouseLeave);
             this.Close.MouseHover += new System.EventHandler(this.Close_MouseHover);
-            // 
-            // sidePanel
-            // 
+            
+            
+            
             this.sidePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(22)))), ((int)(((byte)(28)))));
             this.sidePanel.Controls.Add(this.pictureBox1);
             this.sidePanel.Controls.Add(this.sideTitle);
@@ -308,9 +308,9 @@ namespace Guryflix.Forms
             this.sidePanel.Name = "sidePanel";
             this.sidePanel.Size = new System.Drawing.Size(260, 450);
             this.sidePanel.TabIndex = 36;
-            // 
-            // sideTitle
-            // 
+            
+            
+            
             this.sideTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sideTitle.ForeColor = System.Drawing.Color.White;
             this.sideTitle.Location = new System.Drawing.Point(15, 230);
@@ -319,9 +319,9 @@ namespace Guryflix.Forms
             this.sideTitle.TabIndex = 0;
             this.sideTitle.Text = "Crie a sua conta Na Guryflix";
             this.sideTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // SignUP
-            // 
+            
+            
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;

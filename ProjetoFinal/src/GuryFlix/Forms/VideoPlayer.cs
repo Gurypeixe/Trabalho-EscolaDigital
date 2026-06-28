@@ -21,7 +21,7 @@ namespace Guryflix.Forms
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
         bool isCollapsed = false, isMaximized = false;
-        Label label5, label6, label7;
+        Panel label5, label6, label7;
 
         FileHandlingUtilites fileHandling = new FileHandlingUtilites();
         DoublyLinkedList circularLinkedList;
@@ -36,7 +36,11 @@ namespace Guryflix.Forms
         {
             string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(movieName);
             string localPath = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Trailers\" + movieName + ".mp4";
-            if (string.IsNullOrEmpty(videoUrl) && !System.IO.File.Exists(localPath))
+            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Data\Movie Titles\Movie Trailers\" + movieName + ".mp4");
+            
+            bool localExists = System.IO.File.Exists(localPath) || System.IO.File.Exists(devPath);
+            
+            if (string.IsNullOrEmpty(videoUrl) && !localExists)
             {
                 MessageBox.Show("Filme não disponível de momento!", "Indisponível", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -61,6 +65,8 @@ namespace Guryflix.Forms
         public void initalizeAppComponents()
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.KeyDown += VideoPlayer_KeyDown;
             axWindowsMediaPlayer1.uiMode = "none";
             initializeLabels();
             circularLinkedList = new DoublyLinkedList();
@@ -78,15 +84,26 @@ namespace Guryflix.Forms
 
         void initializeLabels()
         {
-            label5 = new Label();
+            label5 = new Panel();
+            label5.Width = 0;
+            label5.Height = 5;
+            label5.BackColor = Color.Transparent;
             label5.Location = new Point(profileBtn.Location.X, profileBtn.Location.Y + 35);
             this.Controls.Add(label5);
             label5.BringToFront();
-            label6 = new Label();
+
+            label6 = new Panel();
+            label6.Width = 0;
+            label6.Height = 5;
+            label6.BackColor = Color.Transparent;
             label6.Location = new Point(settingsBtn.Location.X, settingsBtn.Location.Y + 35);
             this.Controls.Add(label6);
             label6.BringToFront();
-            label7 = new Label();
+
+            label7 = new Panel();
+            label7.Width = 0;
+            label7.Height = 5;
+            label7.BackColor = Color.Transparent;
             label7.Location = new Point(likedVideosBtn.Location.X, likedVideosBtn.Location.Y + 35);
             this.Controls.Add(label7);
             label7.BringToFront();
@@ -119,8 +136,44 @@ namespace Guryflix.Forms
             axWindowsMediaPlayer1.settings.volume = 100;
             axWindowsMediaPlayer1.settings.autoStart = true;
             axWindowsMediaPlayer1.uiMode = "none";
-            // Ligar ao evento de mudança de estado para atualizar duração
             axWindowsMediaPlayer1.PlayStateChange += axWindowsMediaPlayer1_PlayStateChange;
+            axWindowsMediaPlayer1.KeyDownEvent += axWindowsMediaPlayer1_KeyDownEvent;
+            axWindowsMediaPlayer1.DoubleClickEvent += axWindowsMediaPlayer1_DoubleClickEvent;
+        }
+
+        private void VideoPlayer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (isFullScreen)
+                {
+                    fullScreenBtn_Click(sender, EventArgs.Empty);
+                }
+            }
+            else if (e.KeyCode == Keys.Space)
+            {
+                playPauseBtn_Click(sender, EventArgs.Empty);
+            }
+        }
+
+        private void axWindowsMediaPlayer1_KeyDownEvent(object sender, AxWMPLib._WMPOCXEvents_KeyDownEvent e)
+        {
+            if (e.nKeyCode == 27) // Escape
+            {
+                if (isFullScreen)
+                {
+                    fullScreenBtn_Click(sender, EventArgs.Empty);
+                }
+            }
+            else if (e.nKeyCode == 32) // Space
+            {
+                playPauseBtn_Click(sender, EventArgs.Empty);
+            }
+        }
+
+        private void axWindowsMediaPlayer1_DoubleClickEvent(object sender, AxWMPLib._WMPOCXEvents_DoubleClickEvent e)
+        {
+            fullScreenBtn_Click(sender, EventArgs.Empty);
         }
 
         void importLikedVideos()
@@ -187,7 +240,7 @@ namespace Guryflix.Forms
                     videoId = end >= 0 ? url.Substring(idx, end - idx) : url.Substring(idx);
                 }
                 if (!string.IsNullOrEmpty(videoId))
-                    return "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+                    return "https://www.youtube.com/embed/" + videoId;
             }
             catch { }
             return url;
@@ -199,7 +252,7 @@ namespace Guryflix.Forms
             return url.Contains("youtube.com") || url.Contains("youtu.be");
         }
 
-        // Painel de YouTube
+        
         Panel youTubePanel;
 
         void CreateYouTubePanel()
@@ -211,7 +264,7 @@ namespace Guryflix.Forms
             youTubePanel.Size = _playerOriginalSize;
             youTubePanel.Visible = false;
 
-            // Ícone YouTube
+            
             Label ytIcon = new Label();
             ytIcon.Text = "▶";
             ytIcon.Font = new Font("Arial", 40, FontStyle.Bold);
@@ -249,7 +302,6 @@ namespace Guryflix.Forms
         }
 
         string _currentYouTubeUrl = null;
-
         void startMovie()
         {
             if (isVideoLiked(currentMovie))
@@ -264,10 +316,22 @@ namespace Guryflix.Forms
             label1.Width = titleLabel.Width + 70;
 
             string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(currentMovie);
+            string localPath = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Trailers\" + currentMovie + ".mp4";
+            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Data\Movie Titles\Movie Trailers\" + currentMovie + ".mp4");
+            string actualPath = System.IO.File.Exists(localPath) ? localPath : (System.IO.File.Exists(devPath) ? devPath : localPath);
 
-            if (IsYouTubeUrl(videoUrl))
+            if (System.IO.File.Exists(actualPath))
             {
-                // Esconder WMP e WebBrowser, mostrar painel YouTube
+                isYouTube = false;
+                if (youTubePanel != null) youTubePanel.Visible = false;
+                youTubePlayer.Visible = false;
+                axWindowsMediaPlayer1.Visible = true;
+                axWindowsMediaPlayer1.BringToFront();
+                timer1.Start();
+                axWindowsMediaPlayer1.URL = actualPath;
+            }
+            else if (IsYouTubeUrl(videoUrl))
+            {
                 isYouTube = true;
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 axWindowsMediaPlayer1.Visible = false;
@@ -279,19 +343,25 @@ namespace Guryflix.Forms
                 currentDuration.Text = "--:--:--";
                 totalDuration.Text = "--:--:--";
             }
-            else
+            else if (!string.IsNullOrEmpty(videoUrl))
             {
-                // Esconder painel YouTube, mostrar WMP
                 isYouTube = false;
                 if (youTubePanel != null) youTubePanel.Visible = false;
                 youTubePlayer.Visible = false;
                 axWindowsMediaPlayer1.Visible = true;
                 axWindowsMediaPlayer1.BringToFront();
                 timer1.Start();
-                if (!string.IsNullOrEmpty(videoUrl))
-                    axWindowsMediaPlayer1.URL = videoUrl;
-                else
-                    axWindowsMediaPlayer1.URL = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Trailers\" + currentMovie + ".mp4";
+                axWindowsMediaPlayer1.URL = videoUrl;
+            }
+            else
+            {
+                isYouTube = false;
+                if (youTubePanel != null) youTubePanel.Visible = false;
+                youTubePlayer.Visible = false;
+                axWindowsMediaPlayer1.Visible = true;
+                axWindowsMediaPlayer1.BringToFront();
+                timer1.Start();
+                axWindowsMediaPlayer1.URL = actualPath;
             }
         }
 
@@ -490,7 +560,7 @@ namespace Guryflix.Forms
                 }
                 catch
                 {
-                    Console.WriteLine(circularLinkedList.str_name[i] + " is not found");
+                    Console.WriteLine(circularLinkedList.str_name[i] + " não foi encontrado");
                 }
             }
             listView1.LargeImageList = imgs; // Setting Size Of Images
@@ -552,13 +622,9 @@ namespace Guryflix.Forms
         {
             if (!isCollapsed)
             {
-                label6.BorderStyle = BorderStyle.Fixed3D;
                 label6.BackColor = ColorTranslator.FromHtml("#0066B4");
-                label6.Width = 0;
                 label6.Height = 5;
-                while (label6.Width != settingsBtn.Width)
-                    label6.Width += 1;
-                label6.BorderStyle = BorderStyle.None;
+                label6.Width = settingsBtn.Width;
             }
         }
 
@@ -610,13 +676,9 @@ namespace Guryflix.Forms
 
         private void likedVideosBtn_MouseHover(object sender, EventArgs e)
         {
-            label7.BorderStyle = BorderStyle.Fixed3D;
             label7.BackColor = Color.Chocolate;
-            label7.Width = 0;
             label7.Height = 5;
-            while (label7.Width != homeBtn.Width)
-                label7.Width += 1;
-            label7.BorderStyle = BorderStyle.None;
+            label7.Width = likedVideosBtn.Width;
         }
 
         private void likedVideosBtn_MouseLeave(object sender, EventArgs e)
@@ -637,13 +699,9 @@ namespace Guryflix.Forms
 
         private void homeBtn_MouseHover(object sender, EventArgs e)
         {
-            label2.BorderStyle = BorderStyle.Fixed3D;
             label2.BackColor = Color.Chocolate;
-            label2.Width = 0;
             label2.Height = 5;
-            while (label2.Width != homeBtn.Width)
-                label2.Width += 1;
-            label2.BorderStyle = BorderStyle.None;
+            label2.Width = homeBtn.Width;
         }
 
         private void homeBtn_MouseLeave(object sender, EventArgs e)
@@ -663,13 +721,9 @@ namespace Guryflix.Forms
 
         private void searchBtn_MouseHover(object sender, EventArgs e)
         {
-            label3.BorderStyle = BorderStyle.Fixed3D;
             label3.BackColor = Color.Chocolate;
-            label3.Width = 0;
             label3.Height = 5;
-            while (label3.Width != searchBtn.Width)
-                label3.Width += 1;
-            label3.BorderStyle = BorderStyle.None;
+            label3.Width = searchBtn.Width;
         }
 
         private void searchBtn_MouseLeave(object sender, EventArgs e)
@@ -689,13 +743,9 @@ namespace Guryflix.Forms
 
         private void historyBtn_MouseHover(object sender, EventArgs e)
         {
-            label4.BorderStyle = BorderStyle.Fixed3D;
             label4.BackColor = Color.Chocolate;
-            label4.Width = 0;
             label4.Height = 5;
-            while (label4.Width != searchBtn.Width)
-                label4.Width += 1;
-            label4.BorderStyle = BorderStyle.None;
+            label4.Width = historyBtn.Width;
         }
 
         private void historyBtn_MouseLeave(object sender, EventArgs e)
@@ -715,13 +765,9 @@ namespace Guryflix.Forms
 
         private void profileBtn_MouseHover(object sender, EventArgs e)
         {
-            label5.BorderStyle = BorderStyle.Fixed3D;
             label5.BackColor = Color.Chocolate;
-            label5.Width = 0;
             label5.Height = 5;
-            while (label5.Width != searchBtn.Width)
-                label5.Width += 1;
-            label5.BorderStyle = BorderStyle.None;
+            label5.Width = profileBtn.Width;
         }
         private void profileBtn_MouseLeave(object sender, EventArgs e)
         {

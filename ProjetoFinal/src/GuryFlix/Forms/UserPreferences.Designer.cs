@@ -2,15 +2,15 @@ namespace Guryflix.Forms
 {
     partial class UserPreferences
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        
+        
+        
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        
+        
+        
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +22,10 @@ namespace Guryflix.Forms
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        
+        
+        
+        
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserPreferences));
@@ -59,9 +59,9 @@ namespace Guryflix.Forms
             ((System.ComponentModel.ISupportInitialize)(this.ID1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ID0)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label0
-            // 
+            
+            
+            
             this.label0.AutoSize = true;
             this.label0.ForeColor = System.Drawing.Color.White;
             this.label0.Location = new System.Drawing.Point(83, 276);
@@ -69,9 +69,9 @@ namespace Guryflix.Forms
             this.label0.Size = new System.Drawing.Size(36, 13);
             this.label0.TabIndex = 18;
             this.label0.Text = "Ação";
-            // 
-            // label1
-            // 
+            
+            
+            
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(229, 276);
@@ -79,9 +79,9 @@ namespace Guryflix.Forms
             this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 19;
             this.label1.Text = "Infantil";
-            // 
-            // label2
-            // 
+            
+            
+            
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(390, 276);
@@ -89,9 +89,9 @@ namespace Guryflix.Forms
             this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 20;
             this.label2.Text = "Mistério";
-            // 
-            // label3
-            // 
+            
+            
+            
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(539, 276);
@@ -99,9 +99,9 @@ namespace Guryflix.Forms
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 21;
             this.label3.Text = "Drama";
-            // 
-            // label4
-            // 
+            
+            
+            
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(689, 276);
@@ -109,9 +109,9 @@ namespace Guryflix.Forms
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 22;
             this.label4.Text = "Comédia";
-            // 
-            // label5
-            // 
+            
+            
+            
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(319, 443);
@@ -119,9 +119,9 @@ namespace Guryflix.Forms
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 23;
             this.label5.Text = "Terror";
-            // 
-            // label6
-            // 
+            
+            
+            
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(457, 443);
@@ -129,9 +129,9 @@ namespace Guryflix.Forms
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 24;
             this.label6.Text = "Romance";
-            // 
-            // pictureBox2
-            // 
+            
+            
+            
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(12, 13);
             this.pictureBox2.Name = "pictureBox2";
@@ -140,9 +140,9 @@ namespace Guryflix.Forms
             this.pictureBox2.TabIndex = 27;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox3
-            // 
+            
+            
+            
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
@@ -155,9 +155,9 @@ namespace Guryflix.Forms
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
             this.pictureBox3.MouseHover += new System.EventHandler(this.pictureBox3_MouseHover);
-            // 
-            // nextBtn
-            // 
+            
+            
+            
             this.nextBtn.Image = ((System.Drawing.Image)(resources.GetObject("nextBtn.Image")));
             this.nextBtn.Location = new System.Drawing.Point(741, 363);
             this.nextBtn.Name = "nextBtn";
@@ -166,9 +166,9 @@ namespace Guryflix.Forms
             this.nextBtn.TabIndex = 25;
             this.nextBtn.TabStop = false;
             this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
-            // 
-            // logo
-            // 
+            
+            
+            
             this.logo.BackColor = System.Drawing.Color.Transparent;
             this.logo.Image = ((System.Drawing.Image)(resources.GetObject("logo.Image")));
             this.logo.Location = new System.Drawing.Point(271, 13);
@@ -177,9 +177,9 @@ namespace Guryflix.Forms
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logo.TabIndex = 17;
             this.logo.TabStop = false;
-            // 
-            // ID6
-            // 
+            
+            
+            
             this.ID6.Image = ((System.Drawing.Image)(resources.GetObject("ID6.Image")));
             this.ID6.Location = new System.Drawing.Point(431, 309);
             this.ID6.Name = "ID6";
@@ -188,9 +188,9 @@ namespace Guryflix.Forms
             this.ID6.TabIndex = 7;
             this.ID6.TabStop = false;
             this.ID6.Click += new System.EventHandler(this.ID6_Click);
-            // 
-            // ID5
-            // 
+            
+            
+            
             this.ID5.Image = ((System.Drawing.Image)(resources.GetObject("ID5.Image")));
             this.ID5.Location = new System.Drawing.Point(283, 309);
             this.ID5.Name = "ID5";
@@ -199,9 +199,9 @@ namespace Guryflix.Forms
             this.ID5.TabIndex = 6;
             this.ID5.TabStop = false;
             this.ID5.Click += new System.EventHandler(this.ID5_Click);
-            // 
-            // ID4
-            // 
+            
+            
+            
             this.ID4.Image = ((System.Drawing.Image)(resources.GetObject("ID4.Image")));
             this.ID4.Location = new System.Drawing.Point(649, 142);
             this.ID4.Name = "ID4";
@@ -210,9 +210,9 @@ namespace Guryflix.Forms
             this.ID4.TabIndex = 5;
             this.ID4.TabStop = false;
             this.ID4.Click += new System.EventHandler(this.ID4_Click);
-            // 
-            // ID3
-            // 
+            
+            
+            
             this.ID3.Image = ((System.Drawing.Image)(resources.GetObject("ID3.Image")));
             this.ID3.Location = new System.Drawing.Point(499, 142);
             this.ID3.Name = "ID3";
@@ -221,9 +221,9 @@ namespace Guryflix.Forms
             this.ID3.TabIndex = 4;
             this.ID3.TabStop = false;
             this.ID3.Click += new System.EventHandler(this.ID3_Click);
-            // 
-            // ID2
-            // 
+            
+            
+            
             this.ID2.Image = ((System.Drawing.Image)(resources.GetObject("ID2.Image")));
             this.ID2.Location = new System.Drawing.Point(349, 142);
             this.ID2.Name = "ID2";
@@ -232,9 +232,9 @@ namespace Guryflix.Forms
             this.ID2.TabIndex = 3;
             this.ID2.TabStop = false;
             this.ID2.Click += new System.EventHandler(this.ID2_Click);
-            // 
-            // ID1
-            // 
+            
+            
+            
             this.ID1.Image = ((System.Drawing.Image)(resources.GetObject("ID1.Image")));
             this.ID1.Location = new System.Drawing.Point(191, 142);
             this.ID1.Name = "ID1";
@@ -243,9 +243,9 @@ namespace Guryflix.Forms
             this.ID1.TabIndex = 2;
             this.ID1.TabStop = false;
             this.ID1.Click += new System.EventHandler(this.ID1_Click);
-            // 
-            // ID0
-            // 
+            
+            
+            
             this.ID0.Image = ((System.Drawing.Image)(resources.GetObject("ID0.Image")));
             this.ID0.Location = new System.Drawing.Point(44, 142);
             this.ID0.Name = "ID0";
@@ -254,9 +254,9 @@ namespace Guryflix.Forms
             this.ID0.TabIndex = 1;
             this.ID0.TabStop = false;
             this.ID0.Click += new System.EventHandler(this.ID0_Click);
-            // 
-            // UserPreferences
-            // 
+            
+            
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(35)))), ((int)(((byte)(45)))));
