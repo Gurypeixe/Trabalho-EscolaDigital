@@ -60,16 +60,16 @@ namespace Guryflix.Forms
                         SELECT TOP 5 p.nome_perfil, p.senha_hash 
                         FROM perfis p
                         JOIN contas c ON p.conta_id = c.id
-                        WHERE c.nome_utilizador = @user;";
+                        WHERE c.nome_utilizador = @utilizador;";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@user", currentAccount);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@utilizador", currentAccount);
+                        using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (reader.Read())
+                            while (leitor.Read())
                             {
-                                string name = reader.GetString(0);
-                                string passHash = reader.GetString(1);
+                                string name = leitor.GetString(0);
+                                string passHash = leitor.GetString(1);
 
                                 string imageLocation = Environment.CurrentDirectory + @"\Dados\Perfis\Icones\" + (userCount).ToString() + ".png";
                                 profiles[userCount] = name;

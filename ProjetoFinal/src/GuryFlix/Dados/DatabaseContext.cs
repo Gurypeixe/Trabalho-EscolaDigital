@@ -23,27 +23,27 @@ namespace Guryflix.Dados
             if (_activeConnectionString != null)
                 return _activeConnectionString;
 
-            string[] connectionStrings = new string[]
+            string[] ligacoes = new string[]
             {
                 @"Server=(localdb)\MSSQLLocalDB;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;",
                 @"Server=.\SQLEXPRESS;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;"
             };
 
-            foreach (var connStr in connectionStrings)
+            foreach (var ligacao in ligacoes)
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connStr))
+                    using (SqlConnection conn = new SqlConnection(ligacao))
                     {
                         conn.Open();
-                        _activeConnectionString = connStr;
+                        _activeConnectionString = ligacao;
                         return _activeConnectionString;
                     }
                 }
                 catch { }
             }
 
-            _activeConnectionString = connectionStrings[0];
+            _activeConnectionString = ligacoes[0];
             return _activeConnectionString;
         }
 
@@ -54,8 +54,8 @@ namespace Guryflix.Dados
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    // Garante apenas a criação das tabelas essenciais se não existirem
-                    string createContasTable = @"
+                    
+                    string criarTabelaContas = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[contas]') AND type in (N'U'))
                         CREATE TABLE contas (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -63,9 +63,9 @@ namespace Guryflix.Dados
                             senha_hash VARCHAR(255) NOT NULL,
                             admin INT DEFAULT 0 NOT NULL
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createContasTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaContas, conn)) { cmd.ExecuteNonQuery(); }
 
-                    string createPerfisTable = @"
+                    string criarTabelaPerfis = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[perfis]') AND type in (N'U'))
                         CREATE TABLE perfis (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -74,9 +74,9 @@ namespace Guryflix.Dados
                             senha_hash VARCHAR(255) NOT NULL,
                             CONSTRAINT UQ_Perfil UNIQUE (conta_id, nome_perfil)
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createPerfisTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaPerfis, conn)) { cmd.ExecuteNonQuery(); }
 
-                    string createPreferenciasTable = @"
+                    string criarTabelaPreferencias = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[preferencias]') AND type in (N'U'))
                         CREATE TABLE preferencias (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -84,9 +84,9 @@ namespace Guryflix.Dados
                             genero VARCHAR(100) NOT NULL,
                             CONSTRAINT UQ_Preferencia UNIQUE (perfil_id, genero)
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createPreferenciasTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaPreferencias, conn)) { cmd.ExecuteNonQuery(); }
 
-                    string createHistoricoTable = @"
+                    string criarTabelaHistorico = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[historico]') AND type in (N'U'))
                         CREATE TABLE historico (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -94,9 +94,9 @@ namespace Guryflix.Dados
                             titulo_filme VARCHAR(150) NOT NULL,
                             data_visualizacao DATETIME NOT NULL
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createHistoricoTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaHistorico, conn)) { cmd.ExecuteNonQuery(); }
 
-                    string createVideosCurtidosTable = @"
+                    string criarTabelaVideosCurtidos = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[videos_curtidos]') AND type in (N'U'))
                         CREATE TABLE videos_curtidos (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -105,9 +105,9 @@ namespace Guryflix.Dados
                             data_curtida DATETIME NOT NULL,
                             CONSTRAINT UQ_VideoCurtido UNIQUE (perfil_id, titulo_filme)
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createVideosCurtidosTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaVideosCurtidos, conn)) { cmd.ExecuteNonQuery(); }
 
-                    string createFilmesTable = @"
+                    string criarTabelaFilmes = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[filmes]') AND type in (N'U'))
                         CREATE TABLE filmes (
                             id INT IDENTITY(1,1) PRIMARY KEY,
@@ -118,7 +118,7 @@ namespace Guryflix.Dados
                             sinopse VARCHAR(MAX) NOT NULL,
                             url_video VARCHAR(500) DEFAULT NULL
                         );";
-                    using (SqlCommand cmd = new SqlCommand(createFilmesTable, conn)) { cmd.ExecuteNonQuery(); }
+                    using (SqlCommand cmd = new SqlCommand(criarTabelaFilmes, conn)) { cmd.ExecuteNonQuery(); }
                 }
             }
             catch (Exception ex)
@@ -127,46 +127,46 @@ namespace Guryflix.Dados
             }
         }
 
-        public static bool AccountExists(string username)
+        public static bool AccountExists(string nomeUtilizador)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM contas WHERE nome_utilizador = @user;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM contas WHERE nome_utilizador = @utilizador;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@user", username);
+                    cmd.Parameters.AddWithValue("@utilizador", nomeUtilizador);
                     return (int)cmd.ExecuteScalar() > 0;
                 }
             }
         }
 
-        public static bool VerifyAccountPassword(string username, string password)
+        public static bool VerifyAccountPassword(string nomeUtilizador, string palavraPasse)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT senha_hash FROM contas WHERE nome_utilizador = @user;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT senha_hash FROM contas WHERE nome_utilizador = @utilizador;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@user", username);
+                    cmd.Parameters.AddWithValue("@utilizador", nomeUtilizador);
                     object res = cmd.ExecuteScalar();
                     if (res == null) return false;
                     string hash = res.ToString();
-                    return BCrypt.Net.BCrypt.Verify(password, hash);
+                    return BCrypt.Net.BCrypt.Verify(palavraPasse, hash);
                 }
             }
         }
 
-        public static bool CreateAccount(string username, string hashedPassword)
+        public static bool CreateAccount(string nomeUtilizador, string senhaHash)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO contas (nome_utilizador, senha_hash) VALUES (@user, @hash);", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO contas (nome_utilizador, senha_hash) VALUES (@utilizador, @senhaHash);", conn))
                     {
-                        cmd.Parameters.AddWithValue("@user", username);
-                        cmd.Parameters.AddWithValue("@hash", hashedPassword);
+                        cmd.Parameters.AddWithValue("@utilizador", nomeUtilizador);
+                        cmd.Parameters.AddWithValue("@senhaHash", senhaHash);
                         return cmd.ExecuteNonQuery() > 0;
                     }
                 }
@@ -176,7 +176,7 @@ namespace Guryflix.Dados
 
         public static string[] GetAllAccounts()
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
@@ -184,23 +184,23 @@ namespace Guryflix.Dados
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand("SELECT nome_utilizador FROM contas;", conn))
                     {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader leitor = cmd.ExecuteReader())
                         {
-                            while (reader.Read())
+                            while (leitor.Read())
                             {
-                                list.Add(reader.GetString(0));
+                                lista.Add(leitor.GetString(0));
                             }
                         }
                     }
                 }
             }
             catch { }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static string[] GetProfilesForAccount(string username)
+        public static string[] GetProfilesForAccount(string nomeUtilizador)
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
@@ -208,23 +208,23 @@ namespace Guryflix.Dados
                     SELECT p.nome_perfil 
                     FROM perfis p
                     JOIN contas c ON p.conta_id = c.id
-                    WHERE c.nome_utilizador = @user;";
+                    WHERE c.nome_utilizador = @utilizador;";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@user", username);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@utilizador", nomeUtilizador);
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (leitor.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            lista.Add(leitor.GetString(0));
                         }
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static bool VerifyProfilePassword(string accountUsername, string profileName, string password)
+        public static bool VerifyProfilePassword(string nomeConta, string nomePerfil, string palavraPasse)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
@@ -233,20 +233,20 @@ namespace Guryflix.Dados
                     SELECT p.senha_hash 
                     FROM perfis p
                     JOIN contas c ON p.conta_id = c.id
-                    WHERE c.nome_utilizador = @user AND p.nome_perfil = @pname;";
+                    WHERE c.nome_utilizador = @utilizador AND p.nome_perfil = @nomePerfil;";
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@user", accountUsername);
-                    cmd.Parameters.AddWithValue("@pname", profileName);
+                    cmd.Parameters.AddWithValue("@utilizador", nomeConta);
+                    cmd.Parameters.AddWithValue("@nomePerfil", nomePerfil);
                     object res = cmd.ExecuteScalar();
                     if (res == null) return false;
                     string hash = res.ToString();
-                    return BCrypt.Net.BCrypt.Verify(password, hash);
+                    return BCrypt.Net.BCrypt.Verify(palavraPasse, hash);
                 }
             }
         }
 
-        public static bool CreateProfile(string accountUsername, string profileName, string hashedPassword)
+        public static bool CreateProfile(string nomeConta, string nomePerfil, string senhaHash)
         {
             try
             {
@@ -255,19 +255,19 @@ namespace Guryflix.Dados
                     conn.Open();
                     
                     int contaId = 0;
-                    using (SqlCommand cmd = new SqlCommand("SELECT id FROM contas WHERE nome_utilizador = @user;", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT id FROM contas WHERE nome_utilizador = @utilizador;", conn))
                     {
-                        cmd.Parameters.AddWithValue("@user", accountUsername);
+                        cmd.Parameters.AddWithValue("@utilizador", nomeConta);
                         object res = cmd.ExecuteScalar();
                         if (res == null) return false;
                         contaId = Convert.ToInt32(res);
                     }
 
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO perfis (conta_id, nome_perfil, senha_hash) VALUES (@cid, @name, @hash);", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO perfis (conta_id, nome_perfil, senha_hash) VALUES (@contaId, @nomePerfil, @senhaHash);", conn))
                     {
-                        cmd.Parameters.AddWithValue("@cid", contaId);
-                        cmd.Parameters.AddWithValue("@name", profileName);
-                        cmd.Parameters.AddWithValue("@hash", hashedPassword);
+                        cmd.Parameters.AddWithValue("@contaId", contaId);
+                        cmd.Parameters.AddWithValue("@nomePerfil", nomePerfil);
+                        cmd.Parameters.AddWithValue("@senhaHash", senhaHash);
                         return cmd.ExecuteNonQuery() > 0;
                     }
                 }
@@ -275,104 +275,104 @@ namespace Guryflix.Dados
             catch { return false; }
         }
 
-        private static int GetProfileId(SqlConnection conn, string accountUsername, string profileName)
+        private static int GetProfileId(SqlConnection conn, string nomeConta, string nomePerfil)
         {
             string sql = @"
                 SELECT p.id 
                 FROM perfis p
                 JOIN contas c ON p.conta_id = c.id
-                WHERE c.nome_utilizador = @user AND p.nome_perfil = @pname;";
+                WHERE c.nome_utilizador = @utilizador AND p.nome_perfil = @nomePerfil;";
             using (SqlCommand cmd = new SqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("@user", accountUsername);
-                cmd.Parameters.AddWithValue("@pname", profileName);
+                cmd.Parameters.AddWithValue("@utilizador", nomeConta);
+                cmd.Parameters.AddWithValue("@nomePerfil", nomePerfil);
                 object res = cmd.ExecuteScalar();
                 return res != null ? Convert.ToInt32(res) : 0;
             }
         }
 
-        public static string[] GetProfilePreferences(string accountUsername, string profileName)
+        public static string[] GetProfilePreferences(string nomeConta, string nomePerfil)
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                int pid = GetProfileId(conn, accountUsername, profileName);
-                using (SqlCommand cmd = new SqlCommand("SELECT genero FROM preferencias WHERE perfil_id = @pid;", conn))
+                int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                using (SqlCommand cmd = new SqlCommand("SELECT genero FROM preferencias WHERE perfil_id = @perfilId;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@pid", pid);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (leitor.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            lista.Add(leitor.GetString(0));
                         }
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static void SaveProfilePreferences(string accountUsername, string profileName, string[] genres)
+        public static void SaveProfilePreferences(string nomeConta, string nomePerfil, string[] generos)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                int pid = GetProfileId(conn, accountUsername, profileName);
+                int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
 
-                using (SqlCommand cmd = new SqlCommand("DELETE FROM preferencias WHERE perfil_id = @pid;", conn))
+                using (SqlCommand cmd = new SqlCommand("DELETE FROM preferencias WHERE perfil_id = @perfilId;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@pid", pid);
+                    cmd.Parameters.AddWithValue("@perfilId", perfilId);
                     cmd.ExecuteNonQuery();
                 }
 
-                foreach (string genre in genres)
+                foreach (string genero in generos)
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO preferencias (perfil_id, genero) VALUES (@pid, @genre);", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO preferencias (perfil_id, genero) VALUES (@perfilId, @genero);", conn))
                     {
-                        cmd.Parameters.AddWithValue("@pid", pid);
-                        cmd.Parameters.AddWithValue("@genre", genre);
+                        cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                        cmd.Parameters.AddWithValue("@genero", genero);
                         cmd.ExecuteNonQuery();
                     }
                 }
             }
         }
 
-        public static string[] GetProfileHistory(string accountUsername, string profileName)
+        public static string[] GetProfileHistory(string nomeConta, string nomePerfil)
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                int pid = GetProfileId(conn, accountUsername, profileName);
-                using (SqlCommand cmd = new SqlCommand("SELECT titulo_filme FROM historico WHERE perfil_id = @pid ORDER BY id DESC;", conn))
+                int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                using (SqlCommand cmd = new SqlCommand("SELECT titulo_filme FROM historico WHERE perfil_id = @perfilId ORDER BY id DESC;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@pid", pid);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (leitor.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            lista.Add(leitor.GetString(0));
                         }
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static void AddMovieToHistory(string accountUsername, string profileName, string movieTitle)
+        public static void AddMovieToHistory(string nomeConta, string nomePerfil, string tituloFilme)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    int pid = GetProfileId(conn, accountUsername, profileName);
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO historico (perfil_id, titulo_filme, data_visualizacao) VALUES (@pid, @title, @date);", conn))
+                    int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO historico (perfil_id, titulo_filme, data_visualizacao) VALUES (@perfilId, @titulo, @data);", conn))
                     {
-                        cmd.Parameters.AddWithValue("@pid", pid);
-                        cmd.Parameters.AddWithValue("@title", movieTitle);
-                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                        cmd.Parameters.AddWithValue("@titulo", tituloFilme);
+                        cmd.Parameters.AddWithValue("@data", DateTime.Now);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -380,59 +380,59 @@ namespace Guryflix.Dados
             catch { }
         }
 
-        public static string[] GetProfileLikedVideos(string accountUsername, string profileName)
+        public static string[] GetProfileLikedVideos(string nomeConta, string nomePerfil)
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                int pid = GetProfileId(conn, accountUsername, profileName);
-                using (SqlCommand cmd = new SqlCommand("SELECT titulo_filme FROM videos_curtidos WHERE perfil_id = @pid ORDER BY id DESC;", conn))
+                int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                using (SqlCommand cmd = new SqlCommand("SELECT titulo_filme FROM videos_curtidos WHERE perfil_id = @perfilId ORDER BY id DESC;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@pid", pid);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (leitor.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            lista.Add(leitor.GetString(0));
                         }
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static bool IsVideoLiked(string accountUsername, string profileName, string movieTitle)
+        public static bool IsVideoLiked(string nomeConta, string nomePerfil, string tituloFilme)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                int pid = GetProfileId(conn, accountUsername, profileName);
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM videos_curtidos WHERE perfil_id = @pid AND titulo_filme = @title;", conn))
+                int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM videos_curtidos WHERE perfil_id = @perfilId AND titulo_filme = @titulo;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@pid", pid);
-                    cmd.Parameters.AddWithValue("@title", movieTitle);
+                    cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                    cmd.Parameters.AddWithValue("@titulo", tituloFilme);
                     return (int)cmd.ExecuteScalar() > 0;
                 }
             }
         }
 
-        public static void AddVideoToLiked(string accountUsername, string profileName, string movieTitle)
+        public static void AddVideoToLiked(string nomeConta, string nomePerfil, string tituloFilme)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    int pid = GetProfileId(conn, accountUsername, profileName);
+                    int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
                     string sql = @"
-                        IF NOT EXISTS (SELECT 1 FROM videos_curtidos WHERE perfil_id = @pid AND titulo_filme = @title)
-                        INSERT INTO videos_curtidos (perfil_id, titulo_filme, data_curtida) VALUES (@pid, @title, @date);";
+                        IF NOT EXISTS (SELECT 1 FROM videos_curtidos WHERE perfil_id = @perfilId AND titulo_filme = @titulo)
+                        INSERT INTO videos_curtidos (perfil_id, titulo_filme, data_curtida) VALUES (@perfilId, @titulo, @data);";
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {
-                        cmd.Parameters.AddWithValue("@pid", pid);
-                        cmd.Parameters.AddWithValue("@title", movieTitle);
-                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                        cmd.Parameters.AddWithValue("@titulo", tituloFilme);
+                        cmd.Parameters.AddWithValue("@data", DateTime.Now);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -440,18 +440,18 @@ namespace Guryflix.Dados
             catch { }
         }
 
-        public static void RemoveVideoFromLiked(string accountUsername, string profileName, string movieTitle)
+        public static void RemoveVideoFromLiked(string nomeConta, string nomePerfil, string tituloFilme)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    int pid = GetProfileId(conn, accountUsername, profileName);
-                    using (SqlCommand cmd = new SqlCommand("DELETE FROM videos_curtidos WHERE perfil_id = @pid AND titulo_filme = @title;", conn))
+                    int perfilId = GetProfileId(conn, nomeConta, nomePerfil);
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM videos_curtidos WHERE perfil_id = @perfilId AND titulo_filme = @titulo;", conn))
                     {
-                        cmd.Parameters.AddWithValue("@pid", pid);
-                        cmd.Parameters.AddWithValue("@title", movieTitle);
+                        cmd.Parameters.AddWithValue("@perfilId", perfilId);
+                        cmd.Parameters.AddWithValue("@titulo", tituloFilme);
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -459,77 +459,77 @@ namespace Guryflix.Dados
             catch { }
         }
 
-        public static string[] GetMoviesByGenres(string[] genres)
+        public static string[] GetMoviesByGenres(string[] generos)
         {
-            List<string> list = new List<string>();
-            if (genres == null || genres.Length == 0) return list.ToArray();
+            List<string> lista = new List<string>();
+            if (generos == null || generos.Length == 0) return lista.ToArray();
 
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                List<string> paramNames = new List<string>();
+                List<string> nomesParametros = new List<string>();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = conn;
 
-                for (int i = 0; i < genres.Length; i++)
+                for (int i = 0; i < generos.Length; i++)
                 {
-                    string paramName = "@g" + i;
-                    paramNames.Add(paramName);
-                    cmd.Parameters.AddWithValue(paramName, genres[i].Trim());
+                    string nomeParametro = "@g" + i;
+                    nomesParametros.Add(nomeParametro);
+                    cmd.Parameters.AddWithValue(nomeParametro, generos[i].Trim());
                 }
 
-                cmd.CommandText = "SELECT titulo FROM filmes WHERE genero IN (" + string.Join(",", paramNames) + ") ORDER BY NEWID();";
+                cmd.CommandText = "SELECT titulo FROM filmes WHERE genero IN (" + string.Join(",", nomesParametros) + ") ORDER BY NEWID();";
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader leitor = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (leitor.Read())
                     {
-                        list.Add(reader.GetString(0));
+                        lista.Add(leitor.GetString(0));
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
         public static string[] GetAllMovies()
         {
-            List<string> list = new List<string>();
+            List<string> lista = new List<string>();
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand("SELECT titulo FROM filmes;", conn))
                 {
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        while (reader.Read())
+                        while (leitor.Read())
                         {
-                            list.Add(reader.GetString(0));
+                            lista.Add(leitor.GetString(0));
                         }
                     }
                 }
             }
-            return list.ToArray();
+            return lista.ToArray();
         }
 
-        public static DadosFilme GetMovieDetails(string movieTitle)
+        public static DadosFilme GetMovieDetails(string tituloFilme)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT titulo, genero, ano, afinidade, sinopse FROM filmes WHERE titulo = @title;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT titulo, genero, ano, afinidade, sinopse FROM filmes WHERE titulo = @titulo;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@title", movieTitle);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    cmd.Parameters.AddWithValue("@titulo", tituloFilme);
+                    using (SqlDataReader leitor = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (leitor.Read())
                         {
                             return new DadosFilme
                             {
-                                Titulo = reader.GetString(0),
-                                Genero = reader.GetString(1),
-                                Ano = reader.GetInt32(2),
-                                Afinidade = reader.GetString(3),
-                                Sinopse = reader.GetString(4)
+                                Titulo = leitor.GetString(0),
+                                Genero = leitor.GetString(1),
+                                Ano = leitor.GetInt32(2),
+                                Afinidade = leitor.GetString(3),
+                                Sinopse = leitor.GetString(4)
                             };
                         }
                     }
@@ -538,44 +538,44 @@ namespace Guryflix.Dados
             return null;
         }
 
-        public static string GetMovieGenre(string movieTitle)
+        public static string GetMovieGenre(string tituloFilme)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT genero FROM filmes WHERE titulo = @title;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT genero FROM filmes WHERE titulo = @titulo;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@title", movieTitle);
+                    cmd.Parameters.AddWithValue("@titulo", tituloFilme);
                     object res = cmd.ExecuteScalar();
                     return res != null ? res.ToString() : "";
                 }
             }
         }
 
-        public static string GetMovieVideoUrl(string movieTitle)
+        public static string GetMovieVideoUrl(string tituloFilme)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT url_video FROM filmes WHERE titulo = @title;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT url_video FROM filmes WHERE titulo = @titulo;", conn))
                 {
-                    cmd.Parameters.AddWithValue("@title", movieTitle);
+                    cmd.Parameters.AddWithValue("@titulo", tituloFilme);
                     object res = cmd.ExecuteScalar();
                     return res != null ? res.ToString() : "";
                 }
             }
         }
 
-        public static bool IsAccountAdmin(string username)
+        public static bool IsAccountAdmin(string nomeUtilizador)
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT admin FROM contas WHERE nome_utilizador = @user;", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT admin FROM contas WHERE nome_utilizador = @utilizador;", conn))
                     {
-                        cmd.Parameters.AddWithValue("@user", username);
+                        cmd.Parameters.AddWithValue("@utilizador", nomeUtilizador);
                         object res = cmd.ExecuteScalar();
                         if (res != null)
                         {

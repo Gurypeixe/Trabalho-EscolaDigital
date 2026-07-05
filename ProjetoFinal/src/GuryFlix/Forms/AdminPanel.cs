@@ -245,10 +245,10 @@ namespace Guryflix.Forms
                 {
                     conn.Open();
                     string query = @"
-                        IF NOT EXISTS (SELECT 1 FROM filmes WHERE titulo = @title)
+                        IF NOT EXISTS (SELECT 1 FROM filmes WHERE titulo = @titulo)
                         BEGIN
                             INSERT INTO filmes (titulo, genero, ano, afinidade, sinopse, url_video) 
-                            VALUES (@title, @genre, @year, @affinity, @synopsis, @video_url);
+                            VALUES (@titulo, @genero, @ano, @afinidade, @sinopse, @urlVideo);
                         END
                         ELSE
                         BEGIN
@@ -256,12 +256,12 @@ namespace Guryflix.Forms
                         END";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@title", txtTitle.Text.Trim());
-                        cmd.Parameters.AddWithValue("@genre", txtGenre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@year", year);
-                        cmd.Parameters.AddWithValue("@affinity", string.IsNullOrEmpty(txtAffinity.Text) ? "98% Afinidade" : txtAffinity.Text.Trim());
-                        cmd.Parameters.AddWithValue("@synopsis", string.IsNullOrEmpty(txtSynopsis.Text) ? "Sem sinopse." : txtSynopsis.Text.Trim());
-                        cmd.Parameters.AddWithValue("@video_url", string.IsNullOrEmpty(txtVideoUrl.Text) ? (object)DBNull.Value : txtVideoUrl.Text.Trim());
+                        cmd.Parameters.AddWithValue("@titulo", txtTitle.Text.Trim());
+                        cmd.Parameters.AddWithValue("@genero", txtGenre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ano", year);
+                        cmd.Parameters.AddWithValue("@afinidade", string.IsNullOrEmpty(txtAffinity.Text) ? "98% Afinidade" : txtAffinity.Text.Trim());
+                        cmd.Parameters.AddWithValue("@sinopse", string.IsNullOrEmpty(txtSynopsis.Text) ? "Sem sinopse." : txtSynopsis.Text.Trim());
+                        cmd.Parameters.AddWithValue("@urlVideo", string.IsNullOrEmpty(txtVideoUrl.Text) ? (object)DBNull.Value : txtVideoUrl.Text.Trim());
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -298,18 +298,18 @@ namespace Guryflix.Forms
                     conn.Open();
                     string query = @"
                         UPDATE filmes 
-                        SET titulo = @title, genero = @genre, ano = @year, 
-                            afinidade = @affinity, sinopse = @synopsis, url_video = @video_url
+                        SET titulo = @titulo, genero = @genero, ano = @ano, 
+                            afinidade = @afinidade, sinopse = @sinopse, url_video = @urlVideo
                         WHERE id = @id;";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@id", movieId);
-                        cmd.Parameters.AddWithValue("@title", txtTitle.Text.Trim());
-                        cmd.Parameters.AddWithValue("@genre", txtGenre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@year", year);
-                        cmd.Parameters.AddWithValue("@affinity", txtAffinity.Text.Trim());
-                        cmd.Parameters.AddWithValue("@synopsis", txtSynopsis.Text.Trim());
-                        cmd.Parameters.AddWithValue("@video_url", string.IsNullOrEmpty(txtVideoUrl.Text) ? (object)DBNull.Value : txtVideoUrl.Text.Trim());
+                        cmd.Parameters.AddWithValue("@titulo", txtTitle.Text.Trim());
+                        cmd.Parameters.AddWithValue("@genero", txtGenre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ano", year);
+                        cmd.Parameters.AddWithValue("@afinidade", txtAffinity.Text.Trim());
+                        cmd.Parameters.AddWithValue("@sinopse", txtSynopsis.Text.Trim());
+                        cmd.Parameters.AddWithValue("@urlVideo", string.IsNullOrEmpty(txtVideoUrl.Text) ? (object)DBNull.Value : txtVideoUrl.Text.Trim());
                         cmd.ExecuteNonQuery();
                     }
                 }
