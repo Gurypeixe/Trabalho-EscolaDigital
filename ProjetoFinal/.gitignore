@@ -11,7 +11,7 @@ obj/
 ## NuGet
 *.nuget.props
 *.nuget.targets
-packages/
+# Nota: packages/ está incluída intencionalmente para funcionar sem internet na escola
 
 ## OS Files
 Thumbs.db
