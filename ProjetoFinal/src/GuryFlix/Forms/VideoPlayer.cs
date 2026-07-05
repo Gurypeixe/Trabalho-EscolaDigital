@@ -5,8 +5,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Linq;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -23,20 +23,20 @@ namespace Guryflix.Forms
         bool isCollapsed = false, isMaximized = false;
         Panel label5, label6, label7;
 
-        FileHandlingUtilites fileHandling = new FileHandlingUtilites();
-        DoublyLinkedList circularLinkedList;
+        UtilitariosFicheiros fileHandling = new UtilitariosFicheiros();
+        ListaDuplamenteLigada circularLinkedList;
         string[] arr, likedVideos;
         string ImageNewName = "", userName, accountName;
         int count = 0, tagIndex = 0, profileIndex;
         string currentMovie;
         bool playBackStatus, currentLikeStatus = false;
-        string imageLocation = Environment.CurrentDirectory + @"\Custom UI\Video Player Icons\";
+        string imageLocation = Environment.CurrentDirectory + @"\Interface\IconesReprodutor\";
 
         public static bool IsMovieAvailable(string movieName)
         {
             string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(movieName);
-            string localPath = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Trailers\" + movieName + ".mp4";
-            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Data\Movie Titles\Movie Trailers\" + movieName + ".mp4");
+            string localPath = Environment.CurrentDirectory + @"\Dados\Filmes\Trailers\" + movieName + ".mp4";
+            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Dados\Filmes\Trailers\" + movieName + ".mp4");
             
             bool localExists = System.IO.File.Exists(localPath) || System.IO.File.Exists(devPath);
             
@@ -69,7 +69,7 @@ namespace Guryflix.Forms
             this.KeyDown += VideoPlayer_KeyDown;
             axWindowsMediaPlayer1.uiMode = "none";
             initializeLabels();
-            circularLinkedList = new DoublyLinkedList();
+            circularLinkedList = new ListaDuplamenteLigada();
             importLikedVideos();
         }
 
@@ -215,8 +215,8 @@ namespace Guryflix.Forms
             }
         }
         // Guarda a localização e tamanho originais do player
-        System.Drawing.Point _playerOriginalLocation = new System.Drawing.Point(111, 104);
-        System.Drawing.Size _playerOriginalSize = new System.Drawing.Size(677, 270);
+        System.Drawing.Point playerOriginalLocation = new System.Drawing.Point(111, 104);
+        System.Drawing.Size playerOriginalSize = new System.Drawing.Size(677, 270);
         bool isYouTube = false;
 
         /// <summary>Converte URL YouTube (watch?v=ID) para URL embed.</summary>
@@ -260,8 +260,8 @@ namespace Guryflix.Forms
             if (youTubePanel != null) return;
             youTubePanel = new Panel();
             youTubePanel.BackColor = Color.FromArgb(15, 15, 15);
-            youTubePanel.Location = _playerOriginalLocation;
-            youTubePanel.Size = _playerOriginalSize;
+            youTubePanel.Location = playerOriginalLocation;
+            youTubePanel.Size = playerOriginalSize;
             youTubePanel.Visible = false;
 
             
@@ -292,8 +292,8 @@ namespace Guryflix.Forms
             openBtn.Location = new Point(youTubePanel.Width / 2 - 100, youTubePanel.Height / 2 + 40);
             openBtn.Cursor = Cursors.Hand;
             openBtn.Click += (s, e) => {
-                if (!string.IsNullOrEmpty(_currentYouTubeUrl))
-                    System.Diagnostics.Process.Start(_currentYouTubeUrl);
+                if (!string.IsNullOrEmpty(currentYouTubeUrl))
+                    System.Diagnostics.Process.Start(currentYouTubeUrl);
             };
             youTubePanel.Controls.Add(openBtn);
 
@@ -301,7 +301,7 @@ namespace Guryflix.Forms
             youTubePanel.BringToFront();
         }
 
-        string _currentYouTubeUrl = null;
+        string currentYouTubeUrl = null;
         void startMovie()
         {
             if (isVideoLiked(currentMovie))
@@ -316,8 +316,8 @@ namespace Guryflix.Forms
             label1.Width = titleLabel.Width + 70;
 
             string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(currentMovie);
-            string localPath = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Trailers\" + currentMovie + ".mp4";
-            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Data\Movie Titles\Movie Trailers\" + currentMovie + ".mp4");
+            string localPath = Environment.CurrentDirectory + @"\Dados\Filmes\Trailers\" + currentMovie + ".mp4";
+            string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Dados\Filmes\Trailers\" + currentMovie + ".mp4");
             string actualPath = System.IO.File.Exists(localPath) ? localPath : (System.IO.File.Exists(devPath) ? devPath : localPath);
 
             if (System.IO.File.Exists(actualPath))
@@ -336,7 +336,7 @@ namespace Guryflix.Forms
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 axWindowsMediaPlayer1.Visible = false;
                 youTubePlayer.Visible = false;
-                _currentYouTubeUrl = videoUrl;
+                currentYouTubeUrl = videoUrl;
                 CreateYouTubePanel();
                 youTubePanel.Visible = true;
                 youTubePanel.BringToFront();
@@ -371,7 +371,7 @@ namespace Guryflix.Forms
             {
                 string[] genres = Guryflix.Data.DatabaseContext.GetProfilePreferences(accountName, userName);
                 arr = Guryflix.Data.DatabaseContext.GetMoviesByGenres(genres);
-                Fisher_YatesAlgo randomize = new Fisher_YatesAlgo(arr);
+                AlgoritmoFisherYates randomize = new AlgoritmoFisherYates(arr);
                 arr = randomize.arr;
                 addToLinkedList();
             }
@@ -383,9 +383,9 @@ namespace Guryflix.Forms
             for (int i = 0; i < arr.Length; i++)
             {
                 if (arr[i] != " " || arr[i] != "\n")
-                    circularLinkedList.insertEnd(arr[i]);
+                    circularLinkedList.InserirFim(arr[i]);
             }
-            circularLinkedList.storeData(arr.Length);
+            circularLinkedList.GuardarDados(arr.Length);
         }
 
         private void VideoPlayBack_KeyPress(object sender, KeyPressEventArgs e)
@@ -401,7 +401,7 @@ namespace Guryflix.Forms
         private void nextBtn_Click(object sender, EventArgs e)
         {
             tagIndex++;
-            if (tagIndex < 0 || tagIndex == circularLinkedList.str_name.Length - 1)
+            if (tagIndex < 0 || tagIndex == circularLinkedList.nomesFilmes.Length - 1)
                 tagIndex = 0;
             try
             {
@@ -414,27 +414,27 @@ namespace Guryflix.Forms
             }
             while (currentMovie == "" || currentMovie == null)
                 currentMovie = listView1.Items[++tagIndex].Text;
-            string selected = circularLinkedList.str_name[tagIndex];
+            string selected = circularLinkedList.nomesFilmes[tagIndex];
             Guryflix.Data.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
             startMovie();
         }
         private void previousBtn_Click(object sender, EventArgs e)
         {
             tagIndex--;
-            if (tagIndex < 0 || tagIndex == circularLinkedList.str_name.Length)
-                tagIndex = circularLinkedList.str_name.Length - 1;
+            if (tagIndex < 0 || tagIndex == circularLinkedList.nomesFilmes.Length)
+                tagIndex = circularLinkedList.nomesFilmes.Length - 1;
             try
             {
                 currentMovie = listView1.Items[tagIndex].Text;
             }
             catch
             {
-                tagIndex = circularLinkedList.str_name.Length - 5;
+                tagIndex = circularLinkedList.nomesFilmes.Length - 5;
                 currentMovie = listView1.Items[tagIndex].Text;
             }
             while (currentMovie == "" || currentMovie == null)
                 currentMovie = listView1.Items[--tagIndex].Text;
-            string selected = circularLinkedList.str_name[tagIndex];
+            string selected = circularLinkedList.nomesFilmes[tagIndex];
             Guryflix.Data.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
             startMovie();
         }
@@ -503,8 +503,8 @@ namespace Guryflix.Forms
                 {
                     this.FormBorderStyle = FormBorderStyle.None;
                     this.WindowState = FormWindowState.Normal;
-                    activePlayer.Location = _playerOriginalLocation;
-                    activePlayer.Size = _playerOriginalSize;
+                    activePlayer.Location = playerOriginalLocation;
+                    activePlayer.Size = playerOriginalSize;
                     // Trazer os controlos para a frente novamente
                     panel1.BringToFront();
                     panel3.BringToFront();
@@ -542,25 +542,25 @@ namespace Guryflix.Forms
             ImageList imgs = new ImageList();
             imgs.ImageSize = new Size(110, 75);
             string[] paths = { };
-            for (int i = 0; i < circularLinkedList.str_name.Length; i++)
+            for (int i = 0; i < circularLinkedList.nomesFilmes.Length; i++)
             {
                 try
                 {
-                    if (circularLinkedList.str_name[i] == " " || circularLinkedList.str_name[i] == "\n")
+                    if (circularLinkedList.nomesFilmes[i] == " " || circularLinkedList.nomesFilmes[i] == "\n")
                         continue;
-                    imageLocation = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Icons\" + circularLinkedList.str_name[i] + ".png";
+                    imageLocation = Environment.CurrentDirectory + @"\Dados\Filmes\Icones\" + circularLinkedList.nomesFilmes[i] + ".png";
                     imgs.Images.Add(Image.FromFile(imageLocation));
                     listView1.Items.Add(new ListViewItem
                     {
                         ImageIndex = count,
-                        Text = circularLinkedList.str_name[i],
-                        Tag = circularLinkedList.str_name[i],
+                        Text = circularLinkedList.nomesFilmes[i],
+                        Tag = circularLinkedList.nomesFilmes[i],
                     }); ; ; ;
                     count++;
                 }
                 catch
                 {
-                    Console.WriteLine(circularLinkedList.str_name[i] + " não foi encontrado");
+                    Console.WriteLine(circularLinkedList.nomesFilmes[i] + " não foi encontrado");
                 }
             }
             listView1.LargeImageList = imgs; // Setting Size Of Images

@@ -3,15 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
 {
     public partial class LoginForm : Form
     {
-        
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
@@ -28,59 +27,60 @@ namespace Guryflix.Forms
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
         }
-        LinkedList passwords, accounts;
 
-        FileHandlingUtilites f = new FileHandlingUtilites();
+        ListaLigada palavrasPasse, contas;
+        UtilitariosFicheiros utilitarios = new UtilitariosFicheiros();
+
         public LoginForm()
         {
             InitializeComponent();
-            importPasswordsAndUsers();
+            importarDadosLogin();
         }
 
         private void logInBtn_Click(object sender, EventArgs e)
         {
-            login();
+            iniciarSessao();
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
-            resetEntries();
+            limparCampos();
         }
 
-        
-        private void login()
+        private void iniciarSessao()
         {
-            string ID = userIDBox.Text;
-            string pass = passwordBox.Text;
-            if (checkIDAndPassword(ID, pass))
+            string utilizadorID = userIDBox.Text;
+            string palavraPasse = passwordBox.Text;
+
+            if (verificarCredenciais(utilizadorID, palavraPasse))
             {
                 this.Hide();
-                ProfilesHandling f = new ProfilesHandling(ID);
+                ProfilesHandling f = new ProfilesHandling(utilizadorID);
                 f.Show();
             }
         }
-        private void resetEntries()
+
+        private void limparCampos()
         {
             userIDBox.Text = "";
             passwordBox.Text = "";
         }
 
-        
         private void setStatus(int statusNumber, bool setStatus, string message)
         {
-            string imageLocation = Environment.CurrentDirectory + @"\Custom UI\UI Icons\";
+            string imageLocation = Environment.CurrentDirectory + @"\Interface\IconesUI\";
             switch (statusNumber)
             {
                 case 0:
                     if (setStatus)
                     {
                         statusID.Text = "";
-                        statusSymbolID.ImageLocation = imageLocation + "Right" + ".png";
+                        statusSymbolID.ImageLocation = imageLocation + "Right.png";
                     }
                     else
                     {
                         statusID.ForeColor = Color.Red;
-                        statusSymbolID.ImageLocation = imageLocation + "Wrong" + ".png";
+                        statusSymbolID.ImageLocation = imageLocation + "Wrong.png";
                         statusID.Text = message;
                     }
                     break;
@@ -88,37 +88,37 @@ namespace Guryflix.Forms
                     if (setStatus)
                     {
                         statusPassword.Text = "";
-                        statusSymbolPassword.ImageLocation = imageLocation + "Right" + ".png";
+                        statusSymbolPassword.ImageLocation = imageLocation + "Right.png";
                     }
                     else
                     {
                         statusPassword.ForeColor = Color.Red;
-                        statusSymbolPassword.ImageLocation = imageLocation + "Wrong" + ".png";
+                        statusSymbolPassword.ImageLocation = imageLocation + "Wrong.png";
                         statusPassword.Text = message;
                     }
                     break;
             }
         }
 
-        private void importPasswordsAndUsers()
+        private void importarDadosLogin()
         {
-            accounts = new LinkedList();
-            passwords = new LinkedList();
+            contas = new ListaLigada();
+            palavrasPasse = new ListaLigada();
             
             try
             {
-                string[] users = Guryflix.Data.DatabaseContext.GetAllAccounts();
-                foreach (string user in users)
+                string[] utilizadores = Guryflix.Data.DatabaseContext.GetAllAccounts();
+                foreach (string user in utilizadores)
                 {
-                    accounts.Push(user);
+                    contas.InserirInicio(user);
                 }
             }
             catch { }
         }
 
-        public bool checkID(string ID)
+        public bool verificarUtilizador(string utilizadorID)
         {
-            if (accounts.Search(ID))
+            if (contas.Procurar(utilizadorID))
             {
                 setStatus(0, true, "");
                 return true;
@@ -127,9 +127,9 @@ namespace Guryflix.Forms
             return false;
         }
 
-        private bool checkPassword(string pass)
+        private bool verificarPalavraPasse(string palavraPasse)
         {
-            if (passwords.Search(pass))
+            if (palavrasPasse.Procurar(palavraPasse))
             {
                 setStatus(1, true, "");
                 return true;
@@ -138,28 +138,27 @@ namespace Guryflix.Forms
             return false;
         }
 
-        private bool checkIDAndPassword(string ID, string pass)
+        private bool verificarCredenciais(string utilizadorID, string palavraPasse)
         {
-            if (!checkID(ID))
+            if (!verificarUtilizador(utilizadorID))
                 return false;
 
-            if (Guryflix.Data.DatabaseContext.VerifyAccountPassword(ID, pass))
+            if (Guryflix.Data.DatabaseContext.VerifyAccountPassword(utilizadorID, palavraPasse))
             {
-                passwords.Push(pass);
-                return checkPassword(pass);
+                palavrasPasse.InserirInicio(palavraPasse);
+                return verificarPalavraPasse(palavraPasse);
             }
 
             setStatus(1, false, "Palavra-passe incorreta");
             return false;
         }
 
-        
         private void passwordBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                login();
+                iniciarSessao();
             if (e.KeyChar == (char)Keys.Escape)
-                resetEntries();
+                limparCampos();
         }
 
         private void resetBtn_MouseHover(object sender, EventArgs e)
@@ -181,18 +180,21 @@ namespace Guryflix.Forms
         {
             logInBtn.BackColor = Color.Chocolate;
         }
+
         private void userIDBox_MouseClick(object sender, MouseEventArgs e)
         {
             resetTransition();
             label1.Hide();
             userIDBox.BorderStyle = BorderStyle.Fixed3D;
         }
+
         private void passwordBox_MouseClick(object sender, MouseEventArgs e)
         {
             resetTransition();
             label2.Hide();
             passwordBox.BorderStyle = BorderStyle.Fixed3D;
         }
+
         void resetTransition()
         {
             label1.Show();
@@ -212,6 +214,7 @@ namespace Guryflix.Forms
         {
             Application.Exit();
         }
+
         private void pictureBox3_MouseHover(object sender, EventArgs e)
         {
             closeBtn.BackColor = Color.Chocolate;
@@ -221,6 +224,5 @@ namespace Guryflix.Forms
         {
             closeBtn.BackColor = Color.Transparent;
         }
-
     }
 }

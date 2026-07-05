@@ -5,8 +5,8 @@ using System.IO;
 using System.Data.SqlClient;
 using BCrypt.Net;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -71,7 +71,7 @@ namespace Guryflix.Forms
                                 string name = reader.GetString(0);
                                 string passHash = reader.GetString(1);
 
-                                string imageLocation = Environment.CurrentDirectory + @"\Data\Profiles\Profiles Icons\" + (userCount).ToString() + ".png";
+                                string imageLocation = Environment.CurrentDirectory + @"\Dados\Perfis\Icones\" + (userCount).ToString() + ".png";
                                 profiles[userCount] = name;
                                 passwords[userCount] = passHash;
 

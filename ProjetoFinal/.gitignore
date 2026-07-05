@@ -26,3 +26,6 @@ Desktop.ini
 
 ## Mono Auto Generated Files
 mono_crash.*
+
+## Video files
+*.mp4

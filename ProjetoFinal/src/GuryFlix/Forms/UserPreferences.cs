@@ -3,8 +3,8 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Collections.Generic;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -63,7 +63,7 @@ namespace Guryflix.Forms
         
         private void setIDImage(int index, bool type)
         {
-            string imageLocation = Environment.CurrentDirectory + @"\Data\Movie Titles\Genre Icons\";
+            string imageLocation = Environment.CurrentDirectory + @"\Dados\Generos\Icones\";
             switch (index)
             {
                 case 0:

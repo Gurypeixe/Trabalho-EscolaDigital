@@ -4,8 +4,8 @@ using System.Windows.Forms;
 using System.Drawing;
 using System;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -106,7 +106,7 @@ namespace Guryflix.Forms
 
         void importInformation()
         {
-            string imageLocation = Environment.CurrentDirectory + @"\Data\Profiles\Profiles Icons\" + profileIndex + ".png";
+            string imageLocation = Environment.CurrentDirectory + @"\Dados\Perfis\Icones\" + profileIndex + ".png";
             pictureBox1.ImageLocation = imageLocation;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             Console.WriteLine(imageLocation);

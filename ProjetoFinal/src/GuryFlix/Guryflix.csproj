@@ -102,18 +102,18 @@
     <Compile Include="Forms\AdminPanel.Designer.cs">
       <DependentUpon>AdminPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\DatabaseContext.cs" />
-    <Compile Include="Utilities\AES256EncryptionDecryption.cs" />
-    <Compile Include="Structures\DoublyLinkedList.cs" />
-    <Compile Include="Utilities\FileHandlingUtilites.cs" />
-    <Compile Include="Utilities\Fisher-YatesAlgo.cs" />
+    <Compile Include="Dados\DatabaseContext.cs" />
+    <Compile Include="Utilitarios\EncriptacaoAES256.cs" />
+    <Compile Include="Estruturas\ListaDuplamenteLigada.cs" />
+    <Compile Include="Utilitarios\UtilitariosFicheiros.cs" />
+    <Compile Include="Utilitarios\AlgoritmoFisherYates.cs" />
     <Compile Include="Forms\LikedVideos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\LikedVideos.Designer.cs">
       <DependentUpon>LikedVideos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utilities\Hashing.cs" />
+    <Compile Include="Utilitarios\PesquisaHashing.cs" />
     <Compile Include="Forms\History.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,7 +126,7 @@
     <Compile Include="Forms\IntroPage.Designer.cs">
       <DependentUpon>IntroPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Structures\LinkedList.cs" />
+    <Compile Include="Estruturas\ListaLigada.cs" />
     <Compile Include="Forms\MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,7 +144,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Structures\Queue.cs" />
+    <Compile Include="Estruturas\Fila.cs" />
     <Compile Include="Components\RoundButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -174,7 +174,7 @@
     <Compile Include="Forms\SignUP.Designer.cs">
       <DependentUpon>SignUP.cs</DependentUpon>
     </Compile>
-    <Compile Include="Structures\Stack.cs" />
+    <Compile Include="Estruturas\Pilha.cs" />
     <Compile Include="Forms\UserPreferences.cs">
       <SubType>Form</SubType>
     </Compile>

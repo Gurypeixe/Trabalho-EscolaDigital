@@ -3,8 +3,8 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -25,30 +25,30 @@ namespace Guryflix.Forms
         public static extern bool ReleaseCapture();
         
         Panel label2, label3, label4, label5, label6, label7;
-        string ImageNewName, userName, accountName;
-        int count = 0, profileIndex;
-        bool isMaximized = false;
-        Stack stack;
-        public LikedVideos(string userName, string accountName, int index)
+        string novoNomeImagem, nomeUtilizador, nomeConta;
+        int contador = 0, indicePerfil;
+        bool estaMaximizado = false;
+        Pilha pilhaFavoritos;
+        public LikedVideos(string nomeUtilizador, string nomeConta, int index)
         {
             InitializeComponent();
-            stack = new Stack();
-            this.userName = userName;
-            this.accountName = accountName;
-            this.profileIndex = index;
+            pilhaFavoritos = new Pilha();
+            this.nomeUtilizador = nomeUtilizador;
+            this.nomeConta = nomeConta;
+            this.indicePerfil = index;
             initializeLabels();
-            importLogFile();
+            importarFavoritos();
         }
 
-        void importLogFile()
+        void importarFavoritos()
         {
-            stack = new Stack();
+            pilhaFavoritos = new Pilha();
             try
             {
-                string[] liked = Guryflix.Data.DatabaseContext.GetProfileLikedVideos(accountName, userName);
+                string[] liked = Guryflix.Data.DatabaseContext.GetProfileLikedVideos(nomeConta, nomeUtilizador);
                 for (int i = liked.Length - 1; i >= 0; i--)
                 {
-                    stack.Push(liked[i]);
+                    pilhaFavoritos.Empilhar(liked[i]);
                 }
             }
             catch { }
@@ -61,38 +61,38 @@ namespace Guryflix.Forms
             if (!VideoPlayer.IsMovieAvailable(selected))
                 return;
             this.Hide();
-            VideoPlayer j = new VideoPlayer(userName, accountName, selected, profileIndex);
+            VideoPlayer j = new VideoPlayer(nomeUtilizador, nomeConta, selected, indicePerfil);
             j.Show();
         }
 
         
-        private void populate()
+        private void preencherLista()
         {
             string imageLocation = "";
             ImageList imgs = new ImageList();
             imgs.ImageSize = new Size(150, 100);
             listView1.SmallImageList = imgs; 
             string[] paths = { };
-            while (!stack.IsEmpty())
+            while (!pilhaFavoritos.EstaVazia())
             {
                 try
                 {
-                    if (stack.Peek() == " " || stack.Peek() == "\n")
+                    if (pilhaFavoritos.Espreitar() == " " || pilhaFavoritos.Espreitar() == "\n")
                         continue;
-                    imageLocation = Environment.CurrentDirectory + @"\Data\Movie Titles\Movie Icons\" + stack.Peek() + ".png";
+                    imageLocation = Environment.CurrentDirectory + @"\Dados\Filmes\Icones\" + pilhaFavoritos.Espreitar() + ".png";
                     imgs.Images.Add(Image.FromFile(imageLocation));
                     ListViewItem item = new ListViewItem();
-                    item.ImageIndex = count;
-                    item.SubItems.Add(stack.Peek());
-                    item.Text = stack.Peek();
+                    item.ImageIndex = contador;
+                    item.SubItems.Add(pilhaFavoritos.Espreitar());
+                    item.Text = pilhaFavoritos.Espreitar();
                     listView1.Items.Add(item);
-                    count++;
-                    stack.Pop();
+                    contador++;
+                    pilhaFavoritos.Desempilhar();
                 }
                 catch
                 {
-                    Console.WriteLine(stack.Peek() + " não foi encontrado");
-                    stack.Pop();
+                    Console.WriteLine(pilhaFavoritos.Espreitar() + " não foi encontrado");
+                    pilhaFavoritos.Desempilhar();
                 }
             }
         }
@@ -102,11 +102,11 @@ namespace Guryflix.Forms
         {
             if (e.Label == null)
                 return;
-            ImageNewName = Convert.ToString(e.Label);
+            novoNomeImagem = Convert.ToString(e.Label);
             ListViewItem item1 = listView1.SelectedItems[0];
             FileInfo fileInfo = new FileInfo(item1.Tag.ToString());
-            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + ImageNewName + fileInfo.Extension);
-            listView1.Items[count].Text = ImageNewName;
+            fileInfo.MoveTo(fileInfo.Directory.FullName + "\\" + novoNomeImagem + fileInfo.Extension);
+            listView1.Items[contador].Text = novoNomeImagem;
         }
 
         private void LikedVideos_Load(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace Guryflix.Forms
             listView1.View = View.Details;
             listView1.Columns.Add("Miniaturas", 150);
             listView1.Columns.Add("Títulos", 300);
-            populate();
+            preencherLista();
         }
         void initializeLabels()
         {
@@ -182,15 +182,15 @@ namespace Guryflix.Forms
 
         private void maximizeBtn_Click(object sender, EventArgs e)
         {
-            if (!isMaximized)
+            if (!estaMaximizado)
             {
                 this.WindowState = FormWindowState.Maximized;
-                isMaximized = true;
+                estaMaximizado = true;
             }
             else
             {
                 this.WindowState = FormWindowState.Normal;
-                isMaximized = false;
+                estaMaximizado = false;
             }
         }
 
@@ -232,28 +232,28 @@ namespace Guryflix.Forms
         private void homeBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            MainPage f = new MainPage(userName, accountName, profileIndex);
+            MainPage f = new MainPage(nomeUtilizador, nomeConta, indicePerfil);
             f.Show();
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            SearchBox f = new SearchBox(userName, accountName, profileIndex);
+            SearchBox f = new SearchBox(nomeUtilizador, nomeConta, indicePerfil);
             f.Show();
         }
 
         private void historyBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            History f = new History(userName, accountName, profileIndex);
+            History f = new History(nomeUtilizador, nomeConta, indicePerfil);
             f.Show();
         }
 
         private void profileBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            AccountInfo f = new AccountInfo(userName, accountName, profileIndex);
+            AccountInfo f = new AccountInfo(nomeUtilizador, nomeConta, indicePerfil);
             f.Show();
         }
 

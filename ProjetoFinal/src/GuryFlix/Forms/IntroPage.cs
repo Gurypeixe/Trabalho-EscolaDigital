@@ -1,8 +1,8 @@
 using System;
 using System.Windows.Forms;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
@@ -34,7 +34,7 @@ namespace Guryflix.Forms
         
         void startIntro()
         {
-            string vidLocation = Environment.CurrentDirectory + @"\Custom UI\GuryFlix Starting Animation.mp4";
+            string vidLocation = Environment.CurrentDirectory + @"\Interface\AnimacaoInicio.mp4";
             axWindowsMediaPlayer1.URL = vidLocation;
             axWindowsMediaPlayer1.Ctlcontrols.play();
             timer1.Interval = 1000;

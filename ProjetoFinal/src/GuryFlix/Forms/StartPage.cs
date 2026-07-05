@@ -2,8 +2,8 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 
-using Guryflix.Structures;
-using Guryflix.Utilities;
+using Guryflix.Estruturas;
+using Guryflix.Utilitarios;
 using Guryflix.Components;
 
 namespace Guryflix.Forms
