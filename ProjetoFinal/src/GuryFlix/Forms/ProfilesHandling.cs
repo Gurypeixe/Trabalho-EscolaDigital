@@ -53,7 +53,7 @@ namespace Guryflix.Forms
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(Guryflix.Data.DatabaseContext.GetActiveConnectionString()))
+                using (SqlConnection conn = new SqlConnection(Guryflix.Dados.DatabaseContext.GetActiveConnectionString()))
                 {
                     conn.Open();
                     string sql = @"
@@ -122,7 +122,7 @@ namespace Guryflix.Forms
             if (string.IsNullOrEmpty(profilePassword)) return;
 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(profilePassword, 12);
-            if (Guryflix.Data.DatabaseContext.CreateProfile(currentAccount, profileName, hashedPassword))
+            if (Guryflix.Dados.DatabaseContext.CreateProfile(currentAccount, profileName, hashedPassword))
             {
                 storeProfiles();
             }

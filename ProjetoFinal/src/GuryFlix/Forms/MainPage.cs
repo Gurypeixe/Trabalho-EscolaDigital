@@ -47,7 +47,7 @@ namespace Guryflix.Forms
 
         private void importTypeOfPosters()
         {
-            listaPosters = Guryflix.Data.DatabaseContext.GetProfilePreferences(nomeConta, nomeUtilizador);
+            listaPosters = Guryflix.Dados.DatabaseContext.GetProfilePreferences(nomeConta, nomeUtilizador);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace Guryflix.Forms
         /// </summary>
         public void Method1()
         {
-            listaFilmes = Guryflix.Data.DatabaseContext.GetMoviesByGenres(listaPosters);
+            listaFilmes = Guryflix.Dados.DatabaseContext.GetMoviesByGenres(listaPosters);
             AlgoritmoFisherYates randomize = new AlgoritmoFisherYates(listaFilmes);
             listaFilmes = randomize.arr;
             addToStack();
@@ -194,7 +194,7 @@ namespace Guryflix.Forms
                 if (!VideoPlayer.IsMovieAvailable(selected))
                     return;
                 this.Hide();
-                Guryflix.Data.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
+                Guryflix.Dados.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
                 VideoPlayer j = new VideoPlayer(nomeUtilizador, nomeConta, selected, indicePerfil);
                 j.Show();
             }

@@ -45,7 +45,7 @@ namespace Guryflix.Forms
             pilhaFavoritos = new Pilha();
             try
             {
-                string[] liked = Guryflix.Data.DatabaseContext.GetProfileLikedVideos(nomeConta, nomeUtilizador);
+                string[] liked = Guryflix.Dados.DatabaseContext.GetProfileLikedVideos(nomeConta, nomeUtilizador);
                 for (int i = liked.Length - 1; i >= 0; i--)
                 {
                     pilhaFavoritos.Empilhar(liked[i]);

@@ -107,7 +107,7 @@ namespace Guryflix.Forms
             
             try
             {
-                string[] utilizadores = Guryflix.Data.DatabaseContext.GetAllAccounts();
+                string[] utilizadores = Guryflix.Dados.DatabaseContext.GetAllAccounts();
                 foreach (string user in utilizadores)
                 {
                     contas.InserirInicio(user);
@@ -143,7 +143,7 @@ namespace Guryflix.Forms
             if (!verificarUtilizador(utilizadorID))
                 return false;
 
-            if (Guryflix.Data.DatabaseContext.VerifyAccountPassword(utilizadorID, palavraPasse))
+            if (Guryflix.Dados.DatabaseContext.VerifyAccountPassword(utilizadorID, palavraPasse))
             {
                 palavrasPasse.InserirInicio(palavraPasse);
                 return verificarPalavraPasse(palavraPasse);

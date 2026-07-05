@@ -34,7 +34,7 @@ namespace Guryflix.Forms
 
         public static bool IsMovieAvailable(string movieName)
         {
-            string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(movieName);
+            string videoUrl = Guryflix.Dados.DatabaseContext.GetMovieVideoUrl(movieName);
             string localPath = Environment.CurrentDirectory + @"\Dados\Filmes\Trailers\" + movieName + ".mp4";
             string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Dados\Filmes\Trailers\" + movieName + ".mp4");
             
@@ -180,7 +180,7 @@ namespace Guryflix.Forms
         {
             try
             {
-                likedVideos = Guryflix.Data.DatabaseContext.GetProfileLikedVideos(accountName, userName);
+                likedVideos = Guryflix.Dados.DatabaseContext.GetProfileLikedVideos(accountName, userName);
             }
             catch { likedVideos = new string[0]; }
         }
@@ -315,7 +315,7 @@ namespace Guryflix.Forms
             titleLabel.Text = currentMovie;
             label1.Width = titleLabel.Width + 70;
 
-            string videoUrl = Guryflix.Data.DatabaseContext.GetMovieVideoUrl(currentMovie);
+            string videoUrl = Guryflix.Dados.DatabaseContext.GetMovieVideoUrl(currentMovie);
             string localPath = Environment.CurrentDirectory + @"\Dados\Filmes\Trailers\" + currentMovie + ".mp4";
             string devPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Dados\Filmes\Trailers\" + currentMovie + ".mp4");
             string actualPath = System.IO.File.Exists(localPath) ? localPath : (System.IO.File.Exists(devPath) ? devPath : localPath);
@@ -369,8 +369,8 @@ namespace Guryflix.Forms
         {
             try
             {
-                string[] genres = Guryflix.Data.DatabaseContext.GetProfilePreferences(accountName, userName);
-                arr = Guryflix.Data.DatabaseContext.GetMoviesByGenres(genres);
+                string[] genres = Guryflix.Dados.DatabaseContext.GetProfilePreferences(accountName, userName);
+                arr = Guryflix.Dados.DatabaseContext.GetMoviesByGenres(genres);
                 AlgoritmoFisherYates randomize = new AlgoritmoFisherYates(arr);
                 arr = randomize.arr;
                 addToLinkedList();
@@ -415,7 +415,7 @@ namespace Guryflix.Forms
             while (currentMovie == "" || currentMovie == null)
                 currentMovie = listView1.Items[++tagIndex].Text;
             string selected = circularLinkedList.nomesFilmes[tagIndex];
-            Guryflix.Data.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
+            Guryflix.Dados.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
             startMovie();
         }
         private void previousBtn_Click(object sender, EventArgs e)
@@ -435,7 +435,7 @@ namespace Guryflix.Forms
             while (currentMovie == "" || currentMovie == null)
                 currentMovie = listView1.Items[--tagIndex].Text;
             string selected = circularLinkedList.nomesFilmes[tagIndex];
-            Guryflix.Data.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
+            Guryflix.Dados.DatabaseContext.AddMovieToHistory(accountName, userName, selected);
             startMovie();
         }
 
@@ -531,7 +531,7 @@ namespace Guryflix.Forms
             {
                 axWindowsMediaPlayer1.Ctlcontrols.stop();
                 currentMovie = listView1.SelectedItems[0].Text;
-                Guryflix.Data.DatabaseContext.AddMovieToHistory(accountName, userName, currentMovie);
+                Guryflix.Dados.DatabaseContext.AddMovieToHistory(accountName, userName, currentMovie);
                 startMovie();
             }
         }
@@ -781,13 +781,13 @@ namespace Guryflix.Forms
             if (currentLikeStatus == false)
             {
                 likeON();
-                Guryflix.Data.DatabaseContext.AddVideoToLiked(accountName, userName, currentMovie);
+                Guryflix.Dados.DatabaseContext.AddVideoToLiked(accountName, userName, currentMovie);
                 importLikedVideos();
             }
             else
             {
                 likeOFF();
-                Guryflix.Data.DatabaseContext.RemoveVideoFromLiked(accountName, userName, currentMovie);
+                Guryflix.Dados.DatabaseContext.RemoveVideoFromLiked(accountName, userName, currentMovie);
                 importLikedVideos();
             }
         }

@@ -1,10 +1,9 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using BCrypt.Net;
 
-namespace Guryflix.Data
+namespace Guryflix.Dados
 {
     public class MovieData
     {
@@ -24,34 +23,27 @@ namespace Guryflix.Data
             if (_activeConnectionString != null)
                 return _activeConnectionString;
 
-            string[] masterConnStrings = new string[]
+            string[] connectionStrings = new string[]
             {
-                @"Server=(localdb)\MSSQLLocalDB;Database=master;Integrated Security=True;TrustServerCertificate=True;Connection Timeout=3;",
-                @"Server=.\SQLEXPRESS;Database=master;Integrated Security=True;TrustServerCertificate=True;Connection Timeout=3;",
-                @"Server=localhost;Database=master;Integrated Security=True;TrustServerCertificate=True;Connection Timeout=3;"
+                @"Server=(localdb)\MSSQLLocalDB;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;",
+                @"Server=.\SQLEXPRESS;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;"
             };
 
-            foreach (var connStr in masterConnStrings)
+            foreach (var connStr in connectionStrings)
             {
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connStr))
                     {
                         conn.Open();
-                        
-                        string baseConn = connStr.Replace("Database=master;", "Database=guryflix;");
-                        _activeConnectionString = baseConn;
+                        _activeConnectionString = connStr;
                         return _activeConnectionString;
                     }
                 }
-                catch
-                {
-                    
-                }
+                catch { }
             }
 
-            
-            _activeConnectionString = @"Server=(localdb)\MSSQLLocalDB;Database=guryflix;Integrated Security=True;TrustServerCertificate=True;";
+            _activeConnectionString = connectionStrings[0];
             return _activeConnectionString;
         }
 
@@ -59,26 +51,10 @@ namespace Guryflix.Data
         {
             try
             {
-                string activeMasterConnStr = GetActiveConnectionString().Replace("Database=guryflix;", "Database=master;");
-                
-                
-                using (SqlConnection conn = new SqlConnection(activeMasterConnStr))
+                using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
                 {
                     conn.Open();
-                    string checkDbSql = "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'guryflix') CREATE DATABASE guryflix;";
-                    using (SqlCommand cmd = new SqlCommand(checkDbSql, conn))
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                
-                string guryflixConnStr = GetActiveConnectionString();
-                using (SqlConnection conn = new SqlConnection(guryflixConnStr))
-                {
-                    conn.Open();
-
-                    
+                    // Garante apenas a criação das tabelas essenciais se não existirem
                     string createContasTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[contas]') AND type in (N'U'))
                         CREATE TABLE contas (
@@ -89,17 +65,6 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createContasTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    
-                    try
-                    {
-                        using (SqlCommand cmd = new SqlCommand("ALTER TABLE contas ADD admin INT DEFAULT 0 NOT NULL;", conn))
-                        {
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-                    catch { }
-
-                    
                     string createPerfisTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[perfis]') AND type in (N'U'))
                         CREATE TABLE perfis (
@@ -111,7 +76,6 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createPerfisTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    
                     string createPreferenciasTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[preferencias]') AND type in (N'U'))
                         CREATE TABLE preferencias (
@@ -122,7 +86,6 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createPreferenciasTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    
                     string createHistoricoTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[historico]') AND type in (N'U'))
                         CREATE TABLE historico (
@@ -133,7 +96,6 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createHistoricoTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    
                     string createVideosCurtidosTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[videos_curtidos]') AND type in (N'U'))
                         CREATE TABLE videos_curtidos (
@@ -145,7 +107,6 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createVideosCurtidosTable, conn)) { cmd.ExecuteNonQuery(); }
 
-                    
                     string createFilmesTable = @"
                         IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[filmes]') AND type in (N'U'))
                         CREATE TABLE filmes (
@@ -159,255 +120,12 @@ namespace Guryflix.Data
                         );";
                     using (SqlCommand cmd = new SqlCommand(createFilmesTable, conn)) { cmd.ExecuteNonQuery(); }
                 }
-
-                
-                SeedDatabase();
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Erro ao inicializar a base de dados SQL Server. Certifique-se de que o SQL Server está ativo!\nDetalhes: " + ex.Message, "Erro SQL Server");
             }
         }
-
-        private static void SeedDatabase()
-        {
-            using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
-            {
-                conn.Open();
-
-                
-                int movieCount = 0;
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM filmes;", conn))
-                {
-                    movieCount = (int)cmd.ExecuteScalar();
-                }
-
-                if (movieCount == 0)
-                {
-                    string movieTitlesDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Movie Titles");
-                    if (Directory.Exists(movieTitlesDir))
-                    {
-                        string[] genreFiles = Directory.GetFiles(movieTitlesDir, "*.txt");
-                        foreach (string genreFile in genreFiles)
-                        {
-                            string genreName = Path.GetFileNameWithoutExtension(genreFile);
-                            if (genreName.Equals("Movie Posters", StringComparison.OrdinalIgnoreCase)) continue;
-
-                            string[] movieNames = File.ReadAllLines(genreFile);
-                            foreach (string rawMovieName in movieNames)
-                            {
-                                string movieName = rawMovieName.Trim();
-                                if (string.IsNullOrEmpty(movieName)) continue;
-
-                                string detailsFile = Path.Combine(movieTitlesDir, "Movie Posters", movieName + ".txt");
-                                int year = DateTime.Now.Year;
-                                string affinity = "98% Afinidade";
-                                string synopsis = "Sinopse não disponível.";
-
-                                if (File.Exists(detailsFile))
-                                {
-                                    try
-                                    {
-                                        string[] details = File.ReadAllLines(detailsFile);
-                                        if (details.Length > 0)
-                                        {
-                                            if (details.Length > 1)
-                                            {
-                                                string[] meta = details[1].Split(' ');
-                                                if (meta.Length >= 3)
-                                                {
-                                                     string pct = meta[0] + " Afinidade";
-                                                     affinity = pct;
-                                                     int.TryParse(meta[2], out year);
-                                                }
-                                                else if (meta.Length >= 2)
-                                                {
-                                                     int.TryParse(meta[1], out year);
-                                                }
-                                            }
-                                            if (details.Length > 2)
-                                            {
-                                                synopsis = string.Join("\n", details, 2, details.Length - 2).Trim();
-                                            }
-                                        }
-                                    }
-                                    catch { }
-                                }
-
-                                string insertMovie = @"
-                                    IF NOT EXISTS (SELECT 1 FROM filmes WHERE titulo = @title)
-                                    INSERT INTO filmes (titulo, genero, ano, afinidade, sinopse) VALUES (@title, @genre, @year, @affinity, @synopsis);";
-                                using (SqlCommand cmd = new SqlCommand(insertMovie, conn))
-                                {
-                                    cmd.Parameters.AddWithValue("@title", movieName);
-                                    cmd.Parameters.AddWithValue("@genre", genreName);
-                                    cmd.Parameters.AddWithValue("@year", year);
-                                    cmd.Parameters.AddWithValue("@affinity", affinity);
-                                    cmd.Parameters.AddWithValue("@synopsis", synopsis);
-                                    cmd.ExecuteNonQuery();
-                                }
-                            }
-                        }
-                    }
-                }
-
-                
-                int accountsCount = 0;
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM contas;", conn))
-                {
-                    accountsCount = (int)cmd.ExecuteScalar();
-                }
-
-                if (accountsCount == 0)
-                {
-                    string dataDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data");
-                    string accountsFile = Path.Combine(dataDir, "accounts.txt");
-                    string passwordsFile = Path.Combine(dataDir, "passwords.txt");
-
-                    if (File.Exists(accountsFile) && File.Exists(passwordsFile))
-                    {
-                        string[] usernames = File.ReadAllLines(accountsFile);
-                        string[] passwords = File.ReadAllLines(passwordsFile);
-
-                        int count = Math.Min(usernames.Length, passwords.Length);
-                        for (int i = 0; i < count; i++)
-                        {
-                            string username = usernames[i].Trim();
-                            string passHash = passwords[i].Trim();
-                            if (string.IsNullOrEmpty(username)) continue;
-
-                            int contaId = 0;
-                            string insertConta = @"
-                                IF NOT EXISTS (SELECT 1 FROM contas WHERE nome_utilizador = @user)
-                                BEGIN
-                                    INSERT INTO contas (nome_utilizador, senha_hash, admin) VALUES (@user, @hash, @isAdmin);
-                                    SELECT SCOPE_IDENTITY();
-                                END
-                                ELSE
-                                BEGIN
-                                    SELECT id FROM contas WHERE nome_utilizador = @user;
-                                END";
-                            using (SqlCommand cmd = new SqlCommand(insertConta, conn))
-                            {
-                                cmd.Parameters.AddWithValue("@user", username);
-                                cmd.Parameters.AddWithValue("@hash", passHash);
-                                cmd.Parameters.AddWithValue("@isAdmin", username.Equals("admin", StringComparison.OrdinalIgnoreCase) ? 1 : 0);
-                                object res = cmd.ExecuteScalar();
-                                if (res != null) int.TryParse(res.ToString(), out contaId);
-                            }
-
-                            string profilesFile = Path.Combine(dataDir, "Profiles", username + "Profiles.txt");
-                            string profilePasswordsFile = Path.Combine(dataDir, "Profiles", username + "Passwords.txt");
-
-                            if (File.Exists(profilesFile) && File.Exists(profilePasswordsFile))
-                            {
-                                string[] profNames = File.ReadAllLines(profilesFile);
-                                string[] profPasses = File.ReadAllLines(profilePasswordsFile);
-                                int profCount = Math.Min(profNames.Length, profPasses.Length);
-
-                                for (int p = 0; p < profCount; p++)
-                                {
-                                    string profName = profNames[p].Trim();
-                                    string profPass = profPasses[p].Trim();
-                                    if (string.IsNullOrEmpty(profName)) continue;
-
-                                    int perfilId = 0;
-                                    string insertPerfil = @"
-                                        IF NOT EXISTS (SELECT 1 FROM perfis WHERE conta_id = @cid AND nome_perfil = @name)
-                                        BEGIN
-                                            INSERT INTO perfis (conta_id, nome_perfil, senha_hash) VALUES (@cid, @name, @hash);
-                                            SELECT SCOPE_IDENTITY();
-                                        END
-                                        ELSE
-                                        BEGIN
-                                            SELECT id FROM perfis WHERE conta_id = @cid AND nome_perfil = @name;
-                                        END";
-                                    using (SqlCommand cmd = new SqlCommand(insertPerfil, conn))
-                                    {
-                                        cmd.Parameters.AddWithValue("@cid", contaId);
-                                        cmd.Parameters.AddWithValue("@name", profName);
-                                        cmd.Parameters.AddWithValue("@hash", profPass);
-                                        object res = cmd.ExecuteScalar();
-                                        if (res != null) int.TryParse(res.ToString(), out perfilId);
-                                    }
-
-                                    string userProfileDir = Path.Combine(dataDir, "Profiles", username, profName);
-                                    if (Directory.Exists(userProfileDir))
-                                    {
-                                        string prefFile = Path.Combine(userProfileDir, "preferences.txt");
-                                        if (File.Exists(prefFile))
-                                        {
-                                            string[] prefs = File.ReadAllLines(prefFile);
-                                            foreach (string rawPref in prefs)
-                                            {
-                                                string pref = rawPref.Trim();
-                                                if (string.IsNullOrEmpty(pref)) continue;
-
-                                                string insertPref = @"
-                                                    IF NOT EXISTS (SELECT 1 FROM preferencias WHERE perfil_id = @pid AND genero = @genre)
-                                                    INSERT INTO preferencias (perfil_id, genero) VALUES (@pid, @genre);";
-                                                using (SqlCommand cmd = new SqlCommand(insertPref, conn))
-                                                {
-                                                    cmd.Parameters.AddWithValue("@pid", perfilId);
-                                                    cmd.Parameters.AddWithValue("@genre", pref);
-                                                    cmd.ExecuteNonQuery();
-                                                }
-                                            }
-                                        }
-
-                                        string logFile = Path.Combine(userProfileDir, "Log.txt");
-                                        if (File.Exists(logFile))
-                                        {
-                                            string[] logs = File.ReadAllLines(logFile);
-                                            foreach (string rawLog in logs)
-                                            {
-                                                string log = rawLog.Trim();
-                                                if (string.IsNullOrEmpty(log)) continue;
-
-                                                string insertHist = "INSERT INTO historico (perfil_id, titulo_filme, data_visualizacao) VALUES (@pid, @title, @date);";
-                                                using (SqlCommand cmd = new SqlCommand(insertHist, conn))
-                                                {
-                                                    cmd.Parameters.AddWithValue("@pid", perfilId);
-                                                    cmd.Parameters.AddWithValue("@title", log);
-                                                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                                                    cmd.ExecuteNonQuery();
-                                                }
-                                            }
-                                        }
-
-                                        string likedFile = Path.Combine(userProfileDir, "likedVideos.txt");
-                                        if (File.Exists(likedFile))
-                                        {
-                                            string[] likeds = File.ReadAllLines(likedFile);
-                                            foreach (string rawLiked in likeds)
-                                            {
-                                                string liked = rawLiked.Trim();
-                                                if (string.IsNullOrEmpty(liked)) continue;
-
-                                                string insertLiked = @"
-                                                    IF NOT EXISTS (SELECT 1 FROM videos_curtidos WHERE perfil_id = @pid AND titulo_filme = @title)
-                                                    INSERT INTO videos_curtidos (perfil_id, titulo_filme, data_curtida) VALUES (@pid, @title, @date);";
-                                                using (SqlCommand cmd = new SqlCommand(insertLiked, conn))
-                                                {
-                                                    cmd.Parameters.AddWithValue("@pid", perfilId);
-                                                    cmd.Parameters.AddWithValue("@title", liked);
-                                                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
-                                                    cmd.ExecuteNonQuery();
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        
-        
-        
 
         public static bool AccountExists(string username)
         {
@@ -542,7 +260,7 @@ namespace Guryflix.Data
                         cmd.Parameters.AddWithValue("@user", accountUsername);
                         object res = cmd.ExecuteScalar();
                         if (res == null) return false;
-                        contaId = int.Parse(res.ToString());
+                        contaId = Convert.ToInt32(res);
                     }
 
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO perfis (conta_id, nome_perfil, senha_hash) VALUES (@cid, @name, @hash);", conn))
@@ -569,7 +287,7 @@ namespace Guryflix.Data
                 cmd.Parameters.AddWithValue("@user", accountUsername);
                 cmd.Parameters.AddWithValue("@pname", profileName);
                 object res = cmd.ExecuteScalar();
-                return res != null ? int.Parse(res.ToString()) : 0;
+                return res != null ? Convert.ToInt32(res) : 0;
             }
         }
 
@@ -602,14 +320,12 @@ namespace Guryflix.Data
                 conn.Open();
                 int pid = GetProfileId(conn, accountUsername, profileName);
 
-                
                 using (SqlCommand cmd = new SqlCommand("DELETE FROM preferencias WHERE perfil_id = @pid;", conn))
                 {
                     cmd.Parameters.AddWithValue("@pid", pid);
                     cmd.ExecuteNonQuery();
                 }
 
-                
                 foreach (string genre in genres)
                 {
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO preferencias (perfil_id, genero) VALUES (@pid, @genre);", conn))

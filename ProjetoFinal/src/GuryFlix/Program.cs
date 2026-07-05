@@ -15,7 +15,7 @@ namespace Guryflix
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Guryflix.Data.DatabaseContext.InitializeDatabase();
+            Guryflix.Dados.DatabaseContext.InitializeDatabase();
             Application.Run(new IntroPage());
         }
     }

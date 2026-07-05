@@ -29,7 +29,7 @@ namespace Guryflix.Forms
         {
             InitializeComponent();
             initializeLabels();
-            string[] movieNames = Guryflix.Data.DatabaseContext.GetAllMovies();
+            string[] movieNames = Guryflix.Dados.DatabaseContext.GetAllMovies();
             pesquisa = new PesquisaHashing(movieNames);
             resultados = new string[pesquisa.tamanho];
             this.nomeUtilizador = nomeUtilizador; this.nomeConta = nomeConta;
@@ -42,7 +42,7 @@ namespace Guryflix.Forms
             string selected = listView1.SelectedItems[0].Text;
             if (!VideoPlayer.IsMovieAvailable(selected))
                 return;
-            Guryflix.Data.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
+            Guryflix.Dados.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
             this.Hide();
             VideoPlayer j = new VideoPlayer(nomeUtilizador, nomeConta, selected, indicePerfil);
             j.Show();

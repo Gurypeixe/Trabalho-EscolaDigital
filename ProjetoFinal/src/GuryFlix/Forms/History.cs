@@ -41,7 +41,7 @@ namespace Guryflix.Forms
             pilhaHistorico = new Pilha();
             try
             {
-                string[] history = Guryflix.Data.DatabaseContext.GetProfileHistory(nomeConta, nomeUtilizador);
+                string[] history = Guryflix.Dados.DatabaseContext.GetProfileHistory(nomeConta, nomeUtilizador);
                 for (int i = history.Length - 1; i >= 0; i--)
                 {
                     pilhaHistorico.Empilhar(history[i]);
@@ -57,7 +57,7 @@ namespace Guryflix.Forms
             if (!VideoPlayer.IsMovieAvailable(selected))
                 return;
             this.Hide();
-            Guryflix.Data.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
+            Guryflix.Dados.DatabaseContext.AddMovieToHistory(nomeConta, nomeUtilizador, selected);
             VideoPlayer j = new VideoPlayer(nomeUtilizador, nomeConta, selected, indicePerfil);
             j.Show();
         }

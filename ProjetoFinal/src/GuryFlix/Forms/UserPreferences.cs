@@ -33,7 +33,7 @@ namespace Guryflix.Forms
         }
         public void checkIfPreferencesPresent()
         {
-            string[] prefs = Guryflix.Data.DatabaseContext.GetProfilePreferences(currentAccount, currentProfile);
+            string[] prefs = Guryflix.Dados.DatabaseContext.GetProfilePreferences(currentAccount, currentProfile);
             if (prefs.Length > 0)
             {
                 this.Hide();
@@ -134,7 +134,7 @@ namespace Guryflix.Forms
             for (int i = 0; i < totalOptions; i++)
                 if (selectedLabels[i] != "")
                     list.Add(selectedLabels[i]);
-            Guryflix.Data.DatabaseContext.SaveProfilePreferences(currentAccount, currentProfile, list.ToArray());
+            Guryflix.Dados.DatabaseContext.SaveProfilePreferences(currentAccount, currentProfile, list.ToArray());
         }
         private void nextBtn_Click(object sender, EventArgs e)
         {

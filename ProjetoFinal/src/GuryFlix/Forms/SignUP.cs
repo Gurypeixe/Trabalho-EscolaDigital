@@ -31,7 +31,7 @@ namespace Guryflix.Forms
             listaContas = new ListaLigada();
             try
             {
-                string[] utilizadores = Guryflix.Data.DatabaseContext.GetAllAccounts();
+                string[] utilizadores = Guryflix.Dados.DatabaseContext.GetAllAccounts();
                 foreach (string acc in utilizadores)
                 {
                     listaContas.InserirInicio(acc);
@@ -204,7 +204,7 @@ namespace Guryflix.Forms
             {
                 setStatus(2, true, "");
                 string hashedPassword = BCrypt.Net.BCrypt.HashPassword(palavraPasse, 12);
-                if (Guryflix.Data.DatabaseContext.CreateAccount(utilizadorID, hashedPassword))
+                if (Guryflix.Dados.DatabaseContext.CreateAccount(utilizadorID, hashedPassword))
                 {
                     this.Hide();
                     LoginForm f = new LoginForm();

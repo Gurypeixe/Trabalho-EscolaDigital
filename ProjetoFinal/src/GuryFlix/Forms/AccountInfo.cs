@@ -114,7 +114,7 @@ namespace Guryflix.Forms
             accountLabel.Text = accountName;
 
             // Criar botão Painel de Administração dinamicamente apenas se o utilizador for Admin
-            if (Guryflix.Data.DatabaseContext.IsAccountAdmin(accountName))
+            if (Guryflix.Dados.DatabaseContext.IsAccountAdmin(accountName))
             {
                 Button adminBtn = new Button();
                 adminBtn.Text = "Painel de Administração";
