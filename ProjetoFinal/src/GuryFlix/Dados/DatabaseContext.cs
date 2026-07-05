@@ -468,8 +468,7 @@ namespace Guryflix.Dados
             {
                 conn.Open();
                 List<string> nomesParametros = new List<string>();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = conn;
+                SqlCommand cmd = new SqlCommand { Connection = conn };
 
                 for (int i = 0; i < generos.Length; i++)
                 {

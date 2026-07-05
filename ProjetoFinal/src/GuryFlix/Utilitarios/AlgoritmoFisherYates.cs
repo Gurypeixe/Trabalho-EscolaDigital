@@ -13,9 +13,7 @@ namespace Guryflix.Utilitarios
             for (int i = arr.Length - 1; i > 0; i--)
             {
                 int j = r.Next(0, i + 1);
-                string temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                (arr[i], arr[j]) = (arr[j], arr[i]);
             }
         }
     }

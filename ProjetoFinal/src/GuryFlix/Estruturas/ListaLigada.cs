@@ -17,8 +17,7 @@ namespace Guryflix.Estruturas
 
         public void InserirInicio(string novoDado)
         {
-            No novoNo = new No(novoDado);
-            novoNo.seguinte = cabeca;
+            No novoNo = new No(novoDado) { seguinte = cabeca };
             cabeca = novoNo;
         }
 

@@ -8,7 +8,8 @@ namespace Guryflix.Utilitarios
 {
     class EncriptacaoAES256
     {
-        byte[] key, iv;
+        private readonly byte[] key;
+        private readonly byte[] iv;
         public EncriptacaoAES256(string password)
         {
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, 12);
