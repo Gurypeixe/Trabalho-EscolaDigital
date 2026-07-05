@@ -5,13 +5,13 @@ using BCrypt.Net;
 
 namespace Guryflix.Dados
 {
-    public class MovieData
+    public class DadosFilme
     {
-        public string Title { get; set; }
-        public string Genre { get; set; }
-        public int Year { get; set; }
-        public string Affinity { get; set; }
-        public string Synopsis { get; set; }
+        public string Titulo { get; set; }
+        public string Genero { get; set; }
+        public int Ano { get; set; }
+        public string Afinidade { get; set; }
+        public string Sinopse { get; set; }
     }
 
     public static class DatabaseContext
@@ -511,7 +511,7 @@ namespace Guryflix.Dados
             return list.ToArray();
         }
 
-        public static MovieData GetMovieDetails(string movieTitle)
+        public static DadosFilme GetMovieDetails(string movieTitle)
         {
             using (SqlConnection conn = new SqlConnection(GetActiveConnectionString()))
             {
@@ -523,13 +523,13 @@ namespace Guryflix.Dados
                     {
                         if (reader.Read())
                         {
-                            return new MovieData
+                            return new DadosFilme
                             {
-                                Title = reader.GetString(0),
-                                Genre = reader.GetString(1),
-                                Year = reader.GetInt32(2),
-                                Affinity = reader.GetString(3),
-                                Synopsis = reader.GetString(4)
+                                Titulo = reader.GetString(0),
+                                Genero = reader.GetString(1),
+                                Ano = reader.GetInt32(2),
+                                Afinidade = reader.GetString(3),
+                                Sinopse = reader.GetString(4)
                             };
                         }
                     }
