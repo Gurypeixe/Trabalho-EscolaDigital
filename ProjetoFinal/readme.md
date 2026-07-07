@@ -5,7 +5,6 @@ Este é o projeto **Guryflix**, uma plataforma desktop de catálogo e reproduç�
 ## Estrutura do Repositório
 
 - `docs/` — Pasta contendo a documentação obrigatória do projeto (Proposta, Relatório Técnico, Manual do Utilizador e Apresentação).
-  - `originais/` — Ficheiros de suporte e documentos originais editáveis.
 - `scriptsbd/` — Scripts SQL para base de dados:
   - `criacao_tabelas.sql` — Criação das tabelas no SQL Server.
   - `carga_dados.sql` — Inserção de dados de teste (Seeding).
