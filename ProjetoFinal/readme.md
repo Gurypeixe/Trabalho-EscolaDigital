@@ -2,8 +2,6 @@
 
 Este é o projeto **Guryflix**, uma plataforma desktop de catálogo e reprodução de trailers de filmes desenvolvida em C# Windows Forms com base de dados SQL Server.
 
-O projeto foi reestruturado de acordo com os requisitos obrigatórios de entrega da disciplina.
-
 ## Estrutura do Repositório
 
 - `docs/` — Pasta contendo a documentação obrigatória do projeto (Proposta, Relatório Técnico, Manual do Utilizador e Apresentação).
